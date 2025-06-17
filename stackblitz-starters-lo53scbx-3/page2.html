@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Einloggen / Registrieren</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: arial;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #fff;
+    }
+
+    .slideshow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .slideshow-container img {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .slideshow-dots {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 10px;
+    }
+
+    .dot {
+      width: 90px;
+      height: 3px;
+      border-radius: 3px;
+      background-color: lightgray;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #111;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15%;
+      margin-bottom: 60px;
+    }
+
+    .text-button,
+    .solid-button {
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .text-button {
+      color: #000;
+      background: none;
+    }
+
+    .solid-button {
+      color: white;
+      background-color: #111;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .text-button span,
+    .solid-button span {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideshow-container">
+    <div class="slideshow-dots">
+      <div class="dot" id="dot1"></div>
+      <div class="dot" id="dot2"></div>
+      <div class="dot" id="dot3"></div>
+    </div>
+    <img id="slideshow" src="Slideshow1.png" alt="Slideshow" />
+  </div>
+
+  <div class="button-wrapper">
+    <button class="text-button" onclick="location.href='pageEinloggen.html'">
+      Einloggen <span>&gt;</span>
+    </button>
+    <button class="solid-button" onclick="location.href='pageRegistrieren.html'">
+      Registrieren <span>&gt;</span>
+    </button>
+  </div>
+
+  <script>
+    const images = ['Slideshow1.png', 'Slideshow2.png', 'Slideshow3.png'];
+    let currentIndex = 0;
+    const slideshow = document.getElementById('slideshow');
+    const dots = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
+
+    // Preload images
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    function updateSlideshow() {
+      slideshow.src = images[currentIndex];
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateSlideshow();
+    }, 3000);
+
+    updateSlideshow();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrierung</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 20px 100px;
+      font-family: arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-left: 20px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 50px auto;
+      align-items: start;
+      gap: 12px;
+      position: relative;
+    }
+
+    .step-icon-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .step:not(:last-child) .step-icon-wrapper::after {
+      content: '';
+      position: absolute;
+      top: calc(100% + 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 28px;
+      background-color: lightgray;
+    }
+
+    .circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: lightgray;
+      margin-top: 3px;
+    }
+
+    .step-1 .circle {
+      background-color: #3B82F6;
+    }
+
+    .step-3-icon {
+      width: 35px;
+      height: 35px;
+      object-fit: contain;
+      background: none;
+      border-radius: 0;
+      margin-top: 1px;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .text strong {
+      font-size: 16px;
+    }
+
+    .text span {
+      font-size: 14px;
+      color: gray;
+    }
+
+    .disclaimer {
+      font-size: 10px;
+      color: #888;
+      margin-top: 160px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .disclaimer a {
+      color: #3B82F6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .cta button,
+    .back button {
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .disclaimer-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .disclaimer-link:hover .disclaimer {
+      cursor: pointer;
+    }
+
+    .back {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Registriere dich für<br>Dein Konto.</h1>
+
+  <div class="steps">
+    <div class="step step-1">
+      <div class="step-icon-wrapper">
+        <div class="circle"></div>
+      </div>
+      <div class="text">
+        <strong>Erstelle Dein Konto</strong>
+        <span>Fast geschafft</span>
+      </div>
+    </div>
+
+    <div class="step step-2">
+      <div class="step-icon-wrapper">
+        <div class="circle"></div>
+      </div>
+      <div class="text">
+        <strong>Dein Wissen</strong>
+        <span>Wie fit bist du am Finanzmarkt ?</span>
+      </div>
+    </div>
+
+    <div class="step step-3">
+      <div class="step-icon-wrapper">
+        <img class="step-3-icon" src="assets/Logo.png" alt="App Zugang" />
+      </div>
+      <div class="text">
+        <strong>Erhalte vollen Zugang zur App</strong>
+        <span>Sei der Schnellste am Markt</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer" onclick="window.location.href='pageAGBs.html'">
+    Hiermit erstelle ich ein Konto. Ich bestätige, dass ich der 
+    <a href="#" onclick="event.stopPropagation()">Kundenvereinbarung</a> und den 
+    <a href="#" onclick="event.stopPropagation()">AGBs</a> von HedgeFin zustimme sowie die 
+    <a href="#" onclick="event.stopPropagation()">Datenschutzinformationen</a> und das 
+    <a href="#" onclick="event.stopPropagation()">Preis- &amp; Leistungsverzeichnis</a> gelesen und anerkannt habe. 
+    HedgeFin stellt keine Anlageberatung oder Empfehlung zum Kauf oder Verkauf 
+    von Finanzinstrumenten dar. Mir ist bewusst, dass eine Haftung für finanzielle 
+    Verluste oder sonstige Schäden ausgeschlossen ist.
+  </div>
+
+  <div class="cta">
+    <button onclick="window.location.href='pageRegistrieren3.html'">
+      Weiter
+    </button>
+  </div>
+
+  <div class="back">
+    <button onclick="window.location.href='page2.html'">
+      Zurück
+    </button>
+  </div>
+
+</body>
+</html>

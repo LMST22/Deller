@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial;
+      background: url('assets/bg-chart.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .logo {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .logo img {
+      height: 100px;
+    }
+
+    .login-container {
+  background-color: #111;
+  color: white;
+  padding: 30px 20px;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 360px;
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box; 
+}
+
+.login-container input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 1px solid #888;
+  background-color: #111;
+  color: white;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+    .login-container input::placeholder {
+      color: #aaa;
+    }
+
+    .forgot-link {
+      text-align: right;
+      margin-top: -12px;
+      margin-bottom: 24px;
+    }
+
+    .forgot-link a {
+      color: #3B82F6;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .cta-button {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .cta-button span {
+      margin-left: 10px;
+    }
+
+    .center-image {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -25%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .center-image img {
+      max-width: 280px;
+      height: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="center-image">
+    <img src="assets/person.png" alt="Person" />
+  </div>
+
+  <div class="logo">
+    <img src="assets/Logo.png" alt="HedgeFin" />
+  </div>
+
+  <div class="forgot-link" onclick="window.location.href='passwort.html'">
+  </div>
+
+  <div class="login-container">
+    <input type="email" placeholder="E-Mail-Adresse..." />
+    <input type="password" placeholder="Passwort..." />
+    <div class="forgot-link">
+      <a href="passwort.html">Passwort vergessen?</a>
+    </div>
+  
+    <button class="cta-button" onclick="handleLogin()">Anmelden </button>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const email = document.querySelector('input[type="email"]').value.trim();
+      const password = document.querySelector('input[type="password"]').value.trim();
+  
+      if (email === '' || password === '') {
+        alert('Bitte E-Mail-Adresse und Passwort eingeben.');
+      } else {
+        window.location.href = 'home.html';
+      }
+    }
+  </script>
+</body>
+</html>

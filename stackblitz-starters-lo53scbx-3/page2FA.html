@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2-Faktor-Authentifizierung</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      height: 200px;
+    }
+
+    .info {
+      text-align: center;
+      max-width: 320px;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    .code-inputs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .code-inputs input {
+      width: 40px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 30px;
+      display: none;
+    }
+
+    .cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .cta button {
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="assets/Logo.png" alt="HedgeFin">
+  </div>
+
+  <div class="info">
+    Wir haben dir soeben eine 2-Faktor-Authentifizierungs-Bestätigungs-Mail geschickt.<br>
+    Bitte schau in deinen E-Mails nach, eventuell auch in deinem Spam-Ordner.
+  </div>
+
+  <div class="code-inputs" id="codeContainer">
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+    <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
+  </div>
+
+  <div class="error" id="code-error">
+    Bitte gib einen gültigen 6-stelligen Code ein.
+  </div>
+
+  <div class="cta">
+    <button onclick="checkCode()">Registrierung abschließen</button>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.code-input');
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        const value = e.target.value;
+        if (value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    document.getElementById('codeContainer').addEventListener('paste', function (e) {
+      e.preventDefault();
+      const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+      pasteData.split('').forEach((char, i) => {
+        if (inputs[i]) inputs[i].value = char;
+      });
+      const nextInput = inputs[pasteData.length] || inputs[5];
+      nextInput.focus();
+    });
+
+    function checkCode() {
+      const code = Array.from(inputs).map(input => input.value).join('');
+      const errorDiv = document.getElementById('code-error');
+      if (/^\d{6}$/.test(code)) {
+        errorDiv.style.display = 'none';
+        window.location.href = 'pageEinloggen.html';
+      } else {
+        errorDiv.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>

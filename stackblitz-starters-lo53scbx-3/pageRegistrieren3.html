@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrieren – Schritt 3</title>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  
+    const supabase = createClient(
+      'https://cpuxdumvnnsjovhvdkbe.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdXhkdW12bm5zam92aHZka2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4MjExNzEsImV4cCI6MjA2NTM5NzE3MX0.iTItHArkOpf_u2q-81w8LxTkbDJypZY4YXsn7TeIAy4'
+    );
+  
+    window.checkInputs = async function () {
+      const firstname = document.getElementById('vorname').value.trim();
+      const lastname = document.getElementById('nachname').value.trim();
+      const email1 = document.getElementById('email1');
+      const email2 = document.getElementById('email2');
+      const emailError = document.getElementById('email-error');
+      const emailFormatError = document.getElementById('email-format-error');
+      const passwort = document.getElementById('passwort');
+      const pwError = document.getElementById('pw-error');
+  
+      let valid = true;
+  
+      if (email1.value.trim() !== email2.value.trim()) {
+        email1.classList.add('error');
+        email2.classList.add('error');
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        email1.classList.remove('error');
+        email2.classList.remove('error');
+        emailError.style.display = 'none';
+      }
+  
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email1.value.trim()) || !emailRegex.test(email2.value.trim())) {
+        email1.classList.add('error');
+        email2.classList.add('error');
+        emailFormatError.style.display = 'block';
+        valid = false;
+      } else {
+        emailFormatError.style.display = 'none';
+      }
+  
+      const pwRegex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?])(?=.*\d).{8,}$/;
+      if (!pwRegex.test(passwort.value)) {
+        passwort.classList.add('error');
+        pwError.style.display = 'block';
+        valid = false;
+      } else {
+        passwort.classList.remove('error');
+        pwError.style.display = 'none';
+      }
+  
+      if (valid) {
+        const { data, error } = await supabase
+          .from('users')
+          .insert([{
+            firstname: firstname,
+            lastname: lastname,
+            email: email1.value.trim(),
+            password_hash: passwort.value
+          }]);
+  
+        console.log("Insert Ergebnis:", { data, error });
+  
+        if (error) {
+          alert('Fehler beim Registrieren.');
+          console.error(error);
+        } else {
+          alert('Registrierung erfolgreich!');
+          window.location.href = 'page2FA.html';
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .logo {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .form-container {
+      background-color: #f2f2f2;
+      padding: 30px 20px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+    }
+
+    .form-container h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .form-group input.error {
+      border-color: red;
+    }
+
+    .passwort-hinweis {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+      margin-left: 4px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .cta-button {
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .back {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    .back button {
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="assets/Logo.png" alt="SIGNAL INTEL" />
+  </div>
+
+  <div class="form-container">
+    <h2>Deine Registrierung</h2>
+
+    <div class="form-group">
+      <input type="text" id="vorname" placeholder="Vorname" />
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="nachname" placeholder="Nachname" />
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="email1" placeholder="E-Mail-Adresse" />
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="email2" placeholder="E-Mail-Adresse bestätigen" />
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="passwort" placeholder="Passwort" />
+      <div class="passwort-hinweis">(mind. 8 Zeichen, 1 Sonderzeichen, 1 Zahl)</div>
+    </div>
+
+    <div class="error-message" id="email-error">Die E-Mail-Adressen müssen übereinstimmen</div>
+    <div class="error-message" id="email-format-error">Bitte gib eine gültige E-Mail-Adresse ein</div>
+    <div class="error-message" id="pw-error">Passwort entspricht nicht den Anforderungen</div>
+
+    <button class="cta-button" onclick="checkInputs()">Registrieren</button>
+  </div>
+
+  <div class="back">
+    <button onclick="window.location.href='pageRegistrieren2.html'">
+      Zurück
+    </button>
+  </div>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://cpuxdumvnnsjovhvdkbe.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdXhkdW12bm5zam92aHZka2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4MjExNzEsImV4cCI6MjA2NTM5NzE3MX0.iTItHArkOpf_u2q-81w8LxTkbDJypZY4YXsn7TeIAy4'
+    );
+  
+    async function checkInputs() {
+      const firstname = document.getElementById('vorname').value.trim();
+      const lastname = document.getElementById('nachname').value.trim();
+      const email1 = document.getElementById('email1');
+      const email2 = document.getElementById('email2');
+      const emailError = document.getElementById('email-error');
+      const emailFormatError = document.getElementById('email-format-error');
+      const passwort = document.getElementById('passwort');
+      const pwError = document.getElementById('pw-error');
+  
+      let valid = true;
+  
+      if (email1.value.trim() !== email2.value.trim()) {
+        email1.classList.add('error');
+        email2.classList.add('error');
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        email1.classList.remove('error');
+        email2.classList.remove('error');
+        emailError.style.display = 'none';
+      }
+  
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email1.value.trim()) || !emailRegex.test(email2.value.trim())) {
+        email1.classList.add('error');
+        email2.classList.add('error');
+        emailFormatError.style.display = 'block';
+        valid = false;
+      } else {
+        emailFormatError.style.display = 'none';
+      }
+  
+      const pwRegex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?])(?=.*\d).{8,}$/;
+      if (!pwRegex.test(passwort.value)) {
+        passwort.classList.add('error');
+        pwError.style.display = 'block';
+        valid = false;
+      } else {
+        passwort.classList.remove('error');
+        pwError.style.display = 'none';
+      }
+  
+      if (valid) {
+        const { data, error } = await supabase
+          .from('users')
+          .insert([{
+            firstname: firstname,
+            lastname: lastname,
+            email: email1.value.trim(),
+            password_hash: passwort.value
+          }]);
+  
+        // 🐞 Debug-Ausgabe
+        console.log("Insert Ergebnis:", { data, error });
+  
+        if (error) {
+          alert('Fehler beim Registrieren.');
+          console.error(error);
+        } else {
+          alert('Registrierung erfolgreich!');
+          window.location.href = 'page2FA.html';
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

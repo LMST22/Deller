@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Passwort vergessen</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('assets/bg-chart.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .logo {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .logo img {
+      height: 300px;
+    }
+
+    .reset-container {
+      background-color: #111;
+      color: white;
+      padding: 30px 20px;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 360px;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+    }
+
+    .reset-container h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .reset-container input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 24px;
+      border-radius: 10px;
+      border: 1px solid #888;
+      background-color: #111;
+      color: white;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .reset-container input::placeholder {
+      color: #aaa;
+    }
+
+    .cta-button {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .cta-button span {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="assets/Logo.png" alt="SIGNAL INTEL" />
+  </div>
+
+  <div class="reset-container">
+    <h2>Passwort zurücksetzen</h2>
+    <input type="email" id="email" placeholder="E-Mail-Adresse..." />
+    <button class="cta-button" onclick="handleReset()">Zurücksetzen </button>
+  </div>
+
+  <script>
+    function handleReset() {
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        alert("Bitte gib deine E-Mail-Adresse ein.");
+        return;
+      }
+
+      // Hier kannst du später API-Aufruf einbauen (z. B. Supabase / Firebase)
+      alert("Wenn diese Adresse registriert ist, senden wir dir einen Link.");
+    }
+  </script>
+
+</body>
+</html>
