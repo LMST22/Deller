@@ -15,40 +15,43 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      position: relative;
     }
 
     .logo {
       margin-top: 50px;
       text-align: center;
+      z-index: 2;
     }
 
     .logo img {
-      height: 100px;
+      height: 140px;
     }
 
     .login-container {
-  background-color: #111;
-  color: white;
-  padding: 30px 20px;
-  border-radius: 20px 20px 0 0;
-  width: 100%;
-  max-width: 360px;
-  position: absolute;
-  bottom: 0;
-  box-sizing: border-box; 
-}
+      background-color: #111;
+      color: white;
+      padding: 30px 20px;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 360px;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      z-index: 1;
+    }
 
-.login-container input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  border: 1px solid #888;
-  background-color: #111;
-  color: white;
-  font-size: 14px;
-  box-sizing: border-box;
-}
+    .login-container input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      border: 1px solid #888;
+      background-color: #111;
+      color: white;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
 
     .login-container input::placeholder {
       color: #aaa;
@@ -87,30 +90,23 @@
 
     .center-image {
       position: absolute;
-      top: 25%;
+      bottom: 253px; /* Oberkante des Containers (ca. paddingTop) */
       left: 50%;
-      transform: translate(-50%, -25%);
-      z-index: 0;
+      transform: translateX(-50%);
+      z-index: 1; /* über dem Container */
       pointer-events: none;
     }
 
     .center-image img {
-      max-width: 280px;
+      max-width: 800px;
       height: auto;
     }
-
   </style>
 </head>
 <body>
-  <div class="center-image">
-    <img src="assets/person.png" alt="Person" />
-  </div>
 
   <div class="logo">
     <img src="assets/Logo.png" alt="HedgeFin" />
-  </div>
-
-  <div class="forgot-link" onclick="window.location.href='passwort.html'">
   </div>
 
   <div class="login-container">
@@ -119,15 +115,19 @@
     <div class="forgot-link">
       <a href="passwort.html">Passwort vergessen?</a>
     </div>
-  
-    <button class="cta-button" onclick="handleLogin()">Anmelden </button>
+    <button class="cta-button" onclick="handleLogin()">Anmelden</button>
+  </div>
+
+  <!-- Personenbild jetzt am Ende, damit es "oben liegt" -->
+  <div class="center-image">
+    <img src="assets/PersonChart.png" alt="Person" />
   </div>
 
   <script>
     function handleLogin() {
       const email = document.querySelector('input[type="email"]').value.trim();
       const password = document.querySelector('input[type="password"]').value.trim();
-  
+
       if (email === '' || password === '') {
         alert('Bitte E-Mail-Adresse und Passwort eingeben.');
       } else {
@@ -135,5 +135,6 @@
       }
     }
   </script>
+
 </body>
 </html>
