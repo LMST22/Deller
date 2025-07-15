@@ -88,21 +88,23 @@
       color: gray;
     }
 
-    .disclaimer {
+    .disclaimer-link {
       font-size: 10px;
       color: #888;
       margin-top: 160px;
       line-height: 1.5;
+      display: block;
+      text-decoration: none;
       cursor: pointer;
     }
 
-    .disclaimer a {
+    .disclaimer-link .linktext {
       color: #3B82F6;
       text-decoration: none;
       font-weight: 500;
     }
 
-    .disclaimer a:hover {
+    .disclaimer-link .linktext:hover {
       text-decoration: underline;
     }
 
@@ -203,16 +205,17 @@
     </div>
   </div>
 
-  <div class="disclaimer" onclick="window.location.href='pageAGBs.html'">
+  <!-- ✅ Der ganze Text ist ein Button mit visuell blauen Abschnitten -->
+  <a class="disclaimer-link" href="pageAGBs.html">
     Hiermit erstelle ich ein Konto. Ich bestätige, dass ich der 
-    <a href="#" onclick="event.stopPropagation()">Kundenvereinbarung</a> und den 
-    <a href="#" onclick="event.stopPropagation()">AGBs</a> von HedgeFin zustimme sowie die 
-    <a href="#" onclick="event.stopPropagation()">Datenschutzinformationen</a> und das 
-    <a href="#" onclick="event.stopPropagation()">Preis- &amp; Leistungsverzeichnis</a> gelesen und anerkannt habe. 
+    <span class="linktext">Kundenvereinbarung</span> und den 
+    <span class="linktext">AGBs</span> von HedgeFin zustimme sowie die 
+    <span class="linktext">Datenschutzinformationen</span> und das 
+    <span class="linktext">Preis- &amp; Leistungsverzeichnis</span> gelesen und anerkannt habe. 
     HedgeFin stellt keine Anlageberatung oder Empfehlung zum Kauf oder Verkauf 
     von Finanzinstrumenten dar. Mir ist bewusst, dass eine Haftung für finanzielle 
     Verluste oder sonstige Schäden ausgeschlossen ist.
-  </div>
+  </a>
 
   <div class="cta">
     <button class="disabled-btn">
