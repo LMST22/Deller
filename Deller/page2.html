@@ -5,26 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Einloggen / Registrieren</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      height: 100vh;
+      padding: 0;
       font-family: Arial, sans-serif;
+      height: 100vh;
+      background-color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background-color: #fff;
+      overflow: hidden;
     }
 
     .slideshow-dots {
       display: flex;
       justify-content: center;
-      gap: 25px;
-      margin-top: 40px; /* Platz oben */
+      gap: 5vw;
+      margin-top: 4vh;
     }
 
     .dot {
-      width: 90px;
-      height: 3px;
+      width: 20vw;
+      max-width: 90px;
+      height: 0.4vh;
       border-radius: 3px;
       background-color: lightgray;
       transition: background-color 0.3s ease;
@@ -34,53 +41,65 @@
       background-color: #111;
     }
 
-    .image-container {
-      flex-grow: 1;
+    .middle-section {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      padding: 30px 0; /* Platz oben und unten */
+      align-items: center;
+      flex-grow: 1;
+      gap: 5vh;
+      position: relative;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .image-container img {
       max-height: 50vh;
-      max-width: 80%;
+      max-width: 80vw;
       object-fit: contain;
       border-radius: 10px;
     }
 
     .button-wrapper {
       display: flex;
-      justify-content: space-between;
-      padding: 0 15%;
-      margin-bottom: 40px; /* Abstand nach unten */
+      justify-content: center;
+      gap: 30vw;
+      position: absolute;
+      bottom: 5vh;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .text-button,
     .solid-button {
-      font-size: 15px;
+      font-size: 1rem;
       font-weight: bold;
-      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      border: none;
     }
 
     .text-button {
-      color: #000;
       background: none;
+      color: #000;
+      border: 1px solid lightgray; /* hellgraue Umrandung */
     }
 
     .solid-button {
-      color: white;
       background-color: #111;
-      padding: 10px 20px;
-      border-radius: 10px;
+      color: white;
     }
 
     .text-button span,
     .solid-button span {
-      margin-left: 10px;
+      margin-left: 20px;
     }
   </style>
 </head>
@@ -92,17 +111,20 @@
     <div class="dot" id="dot3"></div>
   </div>
 
-  <div class="image-container">
-    <img id="slideshow" src="/Deller/assets/Slideshow1.png" alt="Slideshow" />
-  </div>
+  <!-- vertikal mittiger Bereich -->
+  <div class="middle-section">
+    <div class="image-container">
+      <img id="slideshow" src="/Deller/assets/Slideshow1.png" alt="Slideshow" />
+    </div>
 
-  <div class="button-wrapper">
-    <button class="text-button" onclick="location.href='pageEinloggen.html'">
-      Einloggen
-    </button>
-    <button class="solid-button" onclick="location.href='pageRegistrieren.html'">
-      Registrieren
-    </button>
+    <div class="button-wrapper">
+      <button class="text-button" onclick="location.href='pageEinloggen.html'">
+        Einloggen
+      </button>
+      <button class="solid-button" onclick="location.href='pageRegistrieren.html'">
+        Registrieren
+      </button>
+    </div>
   </div>
 
   <script>

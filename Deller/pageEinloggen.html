@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: url('assets/bg-chart.jpg') no-repeat center center fixed;
       background-size: cover;
       display: flex;
@@ -16,40 +16,75 @@
       align-items: center;
       min-height: 100vh;
       position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("assets/Candle.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      z-index: -1;
     }
 
     .logo {
-      margin-top: 50px;
+      margin-top: 5vh;
       text-align: center;
       z-index: 2;
     }
 
     .logo img {
-      height: 140px;
+      height: 12vh;
     }
 
     .login-container {
       background-color: #111;
       color: white;
-      padding: 30px 20px;
+      padding: 4vh 3vw 3vh;
       border-radius: 20px 20px 0 0;
-      width: 100%;
-      max-width: 360px;
+      width: 90%;
+      max-width: 500px;
       position: absolute;
       bottom: 0;
       box-sizing: border-box;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .frau-bild-wrapper {
+      position: absolute;
+      top: -30vh; /* sitzt direkt über dem Container */
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 1;
+      pointer-events: none;
+    }
+
+    .frau-bild-wrapper img {
+      height: 30vh;
+      transform: scale(1.2);
+      transform-origin: center center;
+      object-fit: contain;
     }
 
     .login-container input {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 16px;
+      padding: 2.5vh;
+      margin-bottom: 2vh;
       border-radius: 12px;
       border: 1px solid #888;
       background-color: #111;
       color: white;
-      font-size: 14px;
+      font-size: 1rem;
       box-sizing: border-box;
     }
 
@@ -59,13 +94,14 @@
 
     .forgot-link {
       text-align: right;
-      margin-top: -12px;
-      margin-bottom: 24px;
+      margin-top: -1vh;
+      margin-bottom: 2vh;
+      width: 100%;
     }
 
     .forgot-link a {
       color: #3B82F6;
-      font-size: 12px;
+      font-size: 0.8rem;
       text-decoration: none;
     }
 
@@ -73,10 +109,10 @@
       background-color: white;
       color: black;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 1rem;
       border: none;
       border-radius: 10px;
-      padding: 12px 24px;
+      padding: 2.5vh 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -87,20 +123,6 @@
     .cta-button span {
       margin-left: 10px;
     }
-
-    .center-image {
-      position: absolute;
-      bottom: 253px; /* Oberkante des Containers (ca. paddingTop) */
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1; /* über dem Container */
-      pointer-events: none;
-    }
-
-    .center-image img {
-      max-width: 800px;
-      height: auto;
-    }
   </style>
 </head>
 <body>
@@ -110,17 +132,17 @@
   </div>
 
   <div class="login-container">
+    <!-- Bild direkt über dem Container -->
+    <div class="frau-bild-wrapper">
+      <img src="assets/Frau.png" alt="Person" />
+    </div>
+
     <input type="email" placeholder="E-Mail-Adresse..." />
     <input type="password" placeholder="Passwort..." />
     <div class="forgot-link">
       <a href="passwort.html">Passwort vergessen?</a>
     </div>
     <button class="cta-button" onclick="handleLogin()">Anmelden</button>
-  </div>
-
-  <!-- Personenbild jetzt am Ende, damit es "oben liegt" -->
-  <div class="center-image">
-    <img src="assets/PersonChart.png" alt="Person" />
   </div>
 
   <script>

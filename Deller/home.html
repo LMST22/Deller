@@ -20,16 +20,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      font-size: 24px;
+      padding: 2vh 4vw;
+      font-size: 2.5vh;
       font-weight: bold;
     }
 
+    .profile-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
     .profile-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #000;
+      width: 5vh;
+      height: 5vh;
+      border-radius: 50%;
+      background-color: #eee;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -43,18 +50,92 @@
       filter: invert(1);
     }
 
+    .profile-menu {
+      position: absolute;
+      top: 8vh;
+      right: 2vw;
+      width: 180px;
+      background: #f5f5f5;
+      border: 4px solid #999;
+      border-radius: 12px;
+      padding: 16px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .profile-menu.active {
+      display: flex;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+      cursor: pointer;
+    }
+
+    .icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icon-wrapper img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+      filter: invert(1);
+    }
+
+    .logout-button {
+      background: #ffdddd;
+      border: 3px solid red;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .logout-button:hover {
+      background-color: #ffe6e6;
+    }
+
+    .logout-button:focus,
+    .logout-button:active {
+      outline: none;
+      background-color: #ffcccc;
+      border-color: darkred;
+    }
+
     .content {
       flex: 1;
       overflow-y: auto;
-      padding: 0 20px 80px;
+      padding: 0 4vw 10vh;
     }
 
     .section-label {
-      font-size: 14px;
+      font-size: 2vh;
       font-weight: bold;
-      padding: 4px 10px;
+      padding: 0.4rem 0.8rem;
       border-radius: 6px;
-      margin: 10px 0;
+      margin: 2vh 0;
       display: inline-block;
     }
 
@@ -64,9 +145,9 @@
     }
 
     .purple-label {
-      background-color: #a48ff1;
+      background-color: #592ff1;
       color: white;
-      font-style: italic;
+      font-weight: bold;
     }
 
     .card {
@@ -75,8 +156,8 @@
       align-items: center;
       border: 2px solid #888;
       border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 12px;
+      padding: 2vh 2vw;
+      margin-bottom: 2vh;
     }
 
     .card-info {
@@ -86,11 +167,11 @@
 
     .card-header {
       font-weight: bold;
-      margin-bottom: 4px;
+      margin-bottom: 0.5vh;
     }
 
     .card-sub {
-      font-size: 12px;
+      font-size: 1.5vh;
       color: #555;
     }
 
@@ -98,7 +179,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 6px;
+      gap: 1vh;
     }
 
     .green {
@@ -112,7 +193,7 @@
     .favorite-button {
       background: none;
       border: none;
-      font-size: 18px;
+      font-size: 2vh;
       cursor: pointer;
       color: #999;
       transition: color 0.2s ease;
@@ -122,21 +203,20 @@
       color: gold;
     }
 
-    /* === Filter Dropdown === */
     .filter-wrapper {
       position: relative;
       display: inline-block;
-      margin: 10px 0 20px 0;
+      margin: 2vh 0;
     }
 
     .filter-button {
       background-color: transparent;
       border: none;
       color: #111;
-      font-size: 16px;
+      font-size: 2vh;
       font-weight: bold;
       cursor: pointer;
-      padding: 8px 12px;
+      padding: 1vh 2vw;
     }
 
     .filter-dropdown {
@@ -175,7 +255,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 10px 0;
+      padding: 1.5vh 0;
       border-top: 1px solid #ccc;
       background-color: #fff;
       position: fixed;
@@ -184,27 +264,51 @@
     }
 
     footer img {
-      width: 28px;
+      width: 3vh;
       height: auto;
     }
 
     .active {
       filter: hue-rotate(220deg);
     }
+
+    .card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.swipe-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.card.fading {
+  opacity: 0.4;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
   </style>
 </head>
 <body>
   <header>
     Aktuelles
-    <div class="profile-icon">
-      <img src="assets/benutzer.png" alt="Benutzer" />
+
+    <button class="profile-button" onclick="toggleProfileMenu()" aria-label="Benutzer öffnen">
+      <div class="profile-icon">
+        <img src="assets/benutzer.png" alt="Benutzer" />
+      </div>
+    </button>
+
+    <div class="profile-menu" id="profileMenu">
+      <button class="close-button" onclick="toggleProfileMenu()">×</button>
+      <div class="icon-wrapper">
+        <img src="assets/benutzer.png" alt="Benutzer" />
+      </div>
+      <button class="logout-button" onclick="window.location.href='page2.html'">Abmelden</button>
     </div>
   </header>
 
   <div class="content">
-    <div class="section-label red-label">News</div>
+    <div class="section-label red-label">Relevant</div>
 
-    <!-- 🔽 Filter-Dropdown -->
     <div class="filter-wrapper">
       <button class="filter-button">Filter ▾</button>
       <div class="filter-dropdown">
@@ -213,54 +317,98 @@
       </div>
     </div>
 
-    <!-- 🔄 News Cards -->
-    <div class="card">
+    <!-- News Cards -->
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
       <div class="card-info">
-        <div class="card-header">Twitter Tweet - Donald J. Trump</div>
-        <div class="card-sub">vor 3 min</div>
+        <div class="card-header">Bitcoin Aufgenommen in US Cryptoreserve – Donald J. Trump</div>
+        <div class="card-sub">24. März 2025</div>
       </div>
       <div class="card-right">
-        <div class="green">BTC ↑ +2%</div>
-        <div>
-          ℹ️
-          <button class="favorite-button" onclick="toggleFavorite(this)">☆</button>
-        </div>
+        <div class="green">BTC ↑</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
       <div class="card-info">
-        <div class="card-header">Federal Reserve - Zentralbank USA</div>
-        <div class="card-sub">vor 4 min</div>
+        <div class="card-header">Federal Reserve – Zentralbank USA</div>
+        <div class="card-sub">16. Juli 2025</div>
       </div>
       <div class="card-right">
-        <div class="green">BTC ↑ +2%</div>
-        <div>
-          ℹ️
-          <button class="favorite-button" onclick="toggleFavorite(this)">☆</button>
-        </div>
+        <div class="green">BTC ↑</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
       <div class="card-info">
-        <div class="card-header">Tim Cook - Hauptaktionär v. Apple</div>
-        <div class="card-sub">vor 5 min</div>
+        <div class="card-header">Tim Cook – Hauptaktionär von Apple verkauft Anteile</div>
+        <div class="card-sub">10. Juli 2025</div>
       </div>
       <div class="card-right">
-        <div class="red">Apple ↓ -4%</div>
-        <div>
-          ℹ️
-          <button class="favorite-button" onclick="toggleFavorite(this)">☆</button>
-        </div>
+        <div class="red">Apple ↓</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
       </div>
     </div>
 
-    <div class="section-label purple-label">Heute Vormittag</div>
+    <div class="section-label purple-label">Unspektakulär</div>
 
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
+      <div class="card-info">
+        <div class="card-header">Trump kündigt 30 % Zölle auf EU und Mexiko an</div>
+        <div class="card-sub">11. Juli 2025</div>
+      </div>
+      <div class="card-right">
+        <div class="red">DAX Unternehmen ↓</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
+      </div>
+    </div>
+
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
+      <div class="card-info">
+        <div class="card-header">Trump „Liberation Day“-Zölle gegen China</div>
+        <div class="card-sub">3. April 2025</div>
+      </div>
+      <div class="card-right">
+        <div class="red">Tencent Holding ↓</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
+      </div>
+    </div>
+
+    <div class="card"
+         onmousedown="handleMouseDown(event, this)"
+         ontouchstart="handleTouchStart(event, this)"
+         ontouchmove="handleTouchMove(event)"
+         ontouchend="handleTouchEnd(event)">
+      <div class="card-info">
+        <div class="card-header">Federal Reserve veröffentlicht Zinsprotokoll</div>
+        <div class="card-sub">19. Februar 2025</div>
+      </div>
+      <div class="card-right">
+        <div class="green">S&P 500 ↑</div>
+        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -273,6 +421,110 @@
     function toggleFavorite(button) {
       button.classList.toggle('favorited');
       button.textContent = button.classList.contains('favorited') ? '★' : '☆';
+    }
+
+    function toggleProfileMenu() {
+      const menu = document.getElementById("profileMenu");
+      menu.classList.toggle("active");
+    }
+  </script>
+
+  <script>
+    let startX = 0;
+    let currentCard = null;
+    let isDragging = false;
+    let autoSwiped = false;
+
+    function startSwipe(x, el) {
+  startX = x;
+  currentCard = el;
+  isDragging = true;
+  autoSwiped = false;
+  currentCard.style.transition = 'none';
+  currentCard.style.opacity = '1';
+}
+
+    function moveSwipe(x) {
+  if (!isDragging || !currentCard || autoSwiped) return;
+  const dx = x - startX;
+
+  if (dx < 0) {
+    currentCard.style.transform = `translateX(${dx}px)`;
+
+    // Proportionales Fading
+    const fadeEnd = -currentCard.offsetWidth;
+    const clampedDx = Math.max(fadeEnd, dx);
+    const opacity = 1 + (clampedDx / Math.abs(fadeEnd));
+    currentCard.style.opacity = Math.max(opacity, 0.2);
+
+    // Automatisches Auslösen ab 25 % Swipe
+    const threshold = currentCard.offsetWidth * 0.25;
+    if (Math.abs(dx) > threshold) {
+      autoSwiped = true;
+      currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      currentCard.style.transform = `translateX(-100%)`;
+      currentCard.style.opacity = '0';
+
+      setTimeout(() => {
+        if (currentCard) {
+          currentCard.remove();
+          currentCard = null;
+        }
+      }, 300);
+
+      isDragging = false;
+    }
+  }
+}
+
+   function endSwipe(x) {
+  if (!isDragging || !currentCard || autoSwiped) return;
+  const diff = startX - x;
+
+  currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+  if (diff > 80) {
+    currentCard.classList.add('swipe-left');
+    setTimeout(() => {
+      currentCard.remove();
+    }, 300);
+  } else {
+    currentCard.style.transform = 'translateX(0)';
+    currentCard.style.opacity = '1';
+  }
+
+  isDragging = false;
+  currentCard = null;
+}
+
+    // Touch-Events
+    function handleTouchStart(e, el) {
+      startSwipe(e.touches[0].clientX, el);
+    }
+
+    function handleTouchMove(e) {
+      moveSwipe(e.touches[0].clientX);
+    }
+
+    function handleTouchEnd(e) {
+      endSwipe(e.changedTouches[0].clientX);
+    }
+
+    // Maus-Events
+    function handleMouseDown(e, el) {
+      startSwipe(e.clientX, el);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    function handleMouseMove(e) {
+      moveSwipe(e.clientX);
+    }
+
+    function handleMouseUp(e) {
+      endSwipe(e.clientX);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
     }
   </script>
 </body>
