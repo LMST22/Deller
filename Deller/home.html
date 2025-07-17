@@ -285,7 +285,147 @@
   opacity: 0.4;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+#relevant-container,
+#unspektakulaer-container {
+  min-height: 40vh; /* oder je nach gewünschter Mindesthöhe */
+}
+
+.footer-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.info-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.info-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 90%;
+  width: 400px;
+  position: relative;
+  text-align: left;
+  font-size: 1rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.info-button {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.info-button::after {
+  content: attr(data-info);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  width: 220px;
+  z-index: 10;
+}
+
+
   </style>
+
+  <style>
+  .info-popup {
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+
+  .info-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 90%;
+    width: 400px;
+    text-align: left;
+    position: relative;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .info-button {
+  background: none;
+  border: none;
+  font-size: 1.8vh;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.info-button:focus {
+  outline: none;
+}
+
+.info-button:hover {
+  background: none;
+}
+</style>
+
 </head>
 <body>
   <header>
@@ -312,192 +452,259 @@
     <div class="filter-wrapper">
       <button class="filter-button">Filter ▾</button>
       <div class="filter-dropdown">
-        <button onclick="window.location.href='home.html'">Alle</button>
-        <button onclick="window.location.href='home2.html'">Favoriten</button>
+        <button onclick="setFilter('alle')">Alle</button>
+        <button onclick="setFilter('favoriten')">Favoriten</button>
+        <button onclick="setFilter('gelöscht')">Gelöscht</button> <!-- NEU -->
       </div>
     </div>
 
-    <!-- News Cards -->
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Bitcoin Aufgenommen in US Cryptoreserve – Donald J. Trump</div>
-        <div class="card-sub">24. März 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="green">BTC ↑</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
-    </div>
+    <div id="relevant-container"></div>
 
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Federal Reserve – Zentralbank USA</div>
-        <div class="card-sub">16. Juli 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="green">BTC ↑</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
-    </div>
-
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Tim Cook – Hauptaktionär von Apple verkauft Anteile</div>
-        <div class="card-sub">10. Juli 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="red">Apple ↓</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
-    </div>
-
-    <div class="section-label purple-label">Unspektakulär</div>
-
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Trump kündigt 30 % Zölle auf EU und Mexiko an</div>
-        <div class="card-sub">11. Juli 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="red">DAX Unternehmen ↓</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
-    </div>
-
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Trump „Liberation Day“-Zölle gegen China</div>
-        <div class="card-sub">3. April 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="red">Tencent Holding ↓</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
-    </div>
-
-    <div class="card"
-         onmousedown="handleMouseDown(event, this)"
-         ontouchstart="handleTouchStart(event, this)"
-         ontouchmove="handleTouchMove(event)"
-         ontouchend="handleTouchEnd(event)">
-      <div class="card-info">
-        <div class="card-header">Federal Reserve veröffentlicht Zinsprotokoll</div>
-        <div class="card-sub">19. Februar 2025</div>
-      </div>
-      <div class="card-right">
-        <div class="green">S&P 500 ↑</div>
-        <div>ⓘ <button class="favorite-button" onclick="toggleFavorite(this)">☆</button></div>
-      </div>
+    <div style="margin-top: 4vh;">
+      <div class="section-label purple-label">Unspektakulär</div>
+      <div id="unspektakulaer-container"></div>
     </div>
   </div>
 
   <footer>
+  <button class="footer-btn" aria-label="News">
     <img src="assets/icon-news.png" alt="News" class="active" />
-    <img src="assets/icon-chart.png" alt="Chart" />
+  </button>
+
+  <button class="footer-btn" aria-label="Chart"
+        onmouseenter="showInfoMessage()"
+        onmouseleave="hideInfoMessage()">
+  <img src="assets/icon-chart.png" alt="Chart" />
+</button>
+
+  <button class="footer-btn" aria-label="Einstellungen" onclick="window.location.href='Maerkte2.html'">
     <img src="assets/icon-settings.png" alt="Settings" />
-  </footer>
+  </button>
+</footer>
 
   <script>
-    function toggleFavorite(button) {
-      button.classList.toggle('favorited');
-      button.textContent = button.classList.contains('favorited') ? '★' : '☆';
-    }
+    const cardsData = [
+      {
+        id: 'card-btc',
+        title: 'Bitcoin Aufgenommen in US Cryptoreserve – Donald J. Trump',
+        date: '24. März 2025',
+        category: 'relevant',
+        trend: 'green',
+        trendLabel: 'BTC ↑'
+      },
+      {
+        id: 'card-fed',
+        title: 'Federal Reserve – Zentralbank USA',
+        date: '16. Juli 2025',
+        category: 'relevant',
+        trend: 'green',
+        trendLabel: 'DOW Jones ↑'
+      },
+      {
+        id: 'card-apple',
+        title: 'Tim Cook – Hauptaktionär von Apple verkauft Anteile',
+        date: '10. Juli 2025',
+        category: 'relevant',
+        trend: 'red',
+        trendLabel: 'Apple ↓'
+      },
+      {
+        id: 'card-zoll',
+        title: 'Trump kündigt 30 % Zölle auf EU und Mexiko an',
+        date: '11. Juli 2025',
+        category: 'unspektakulaer',
+        trend: 'red',
+        trendLabel: 'DAX Unternehmen ↓'
+      },
+      {
+        id: 'card-china',
+        title: 'Trump „Liberation Day“-Zölle gegen China',
+        date: '3. April 2025',
+        category: 'unspektakulaer',
+        trend: 'red',
+        trendLabel: 'Tencent Holding ↓'
+      },
+      {
+        id: 'card-zins',
+        title: 'Federal Reserve veröffentlicht Zinsprotokoll',
+        date: '19. Februar 2025',
+        category: 'unspektakulaer',
+        trend: 'green',
+        trendLabel: 'S&P 500 ↑'
+      }
+    ];
+
+    let currentFilter = 'alle';
 
     function toggleProfileMenu() {
-      const menu = document.getElementById("profileMenu");
-      menu.classList.toggle("active");
+      document.getElementById("profileMenu").classList.toggle("active");
     }
-  </script>
 
-  <script>
+    function toggleFavorite(button) {
+      const card = button.closest('.card');
+      const cardId = card.dataset.id;
+
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+      if (favorites.includes(cardId)) {
+        favorites = favorites.filter(id => id !== cardId);
+        if (currentFilter === 'favoriten') card.remove();
+      } else {
+        favorites.push(cardId);
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderCards(currentFilter);
+    }
+
+    function permanentlyRemoveCard(cardId) {
+      let removed = JSON.parse(localStorage.getItem('removedCards')) || [];
+      if (!removed.includes(cardId)) {
+        removed.push(cardId);
+        localStorage.setItem('removedCards', JSON.stringify(removed));
+      }
+    }
+
+    function renderCards(filter = 'alle') {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const removed = JSON.parse(localStorage.getItem('removedCards')) || [];
+  const showDeleted = filter === 'gelöscht';
+
+  const relevantContainer = document.getElementById('relevant-container');
+  const unspektakulaerContainer = document.getElementById('unspektakulaer-container');
+
+  // Container leeren
+  relevantContainer.innerHTML = '';
+  unspektakulaerContainer.innerHTML = '';
+
+  cardsData.forEach(card => {
+    const isFav = favorites.includes(card.id);
+    const isDeleted = removed.includes(card.id);
+
+    if (!showDeleted && isDeleted) return;
+    if (showDeleted && !isDeleted) return;
+    if (filter === 'favoriten' && !isFav) return;
+
+    const container = card.category === 'relevant' ? relevantContainer : unspektakulaerContainer;
+
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.dataset.id = card.id;
+
+    el.setAttribute('onmousedown', 'handleMouseDown(event, this)');
+    el.setAttribute('ontouchstart', 'handleTouchStart(event, this)');
+    el.setAttribute('ontouchmove', 'handleTouchMove(event)');
+    el.setAttribute('ontouchend', 'handleTouchEnd(event)');
+
+    el.innerHTML = `
+      <div class="card-info">
+        <div class="card-header">${card.title}</div>
+        <div class="card-sub">${card.date}</div>
+      </div>
+      <div class="card-right">
+        <div class="${card.trend}">${card.trendLabel}</div>
+        <div>
+          <button class="info-button" onclick="openInfo('${card.id}')">ⓘ</button>
+          <button class="favorite-button ${isFav ? 'favorited' : ''}" onclick="toggleFavorite(this)">
+            ${isFav ? '★' : '☆'}
+          </button>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(el);
+  });
+}
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      renderCards(filter);
+    }
+
     let startX = 0;
     let currentCard = null;
     let isDragging = false;
     let autoSwiped = false;
 
     function startSwipe(x, el) {
-  startX = x;
-  currentCard = el;
-  isDragging = true;
-  autoSwiped = false;
-  currentCard.style.transition = 'none';
-  currentCard.style.opacity = '1';
-}
+      startX = x;
+      currentCard = el;
+      isDragging = true;
+      autoSwiped = false;
+      currentCard.style.transition = 'none';
+      currentCard.style.opacity = '1';
+    }
 
     function moveSwipe(x) {
-  if (!isDragging || !currentCard || autoSwiped) return;
-  const dx = x - startX;
+      if (!isDragging || !currentCard || autoSwiped) return;
+      const dx = x - startX;
 
-  if (dx < 0) {
-    currentCard.style.transform = `translateX(${dx}px)`;
+      if (dx < 0) {
+        currentCard.style.transform = `translateX(${dx}px)`;
+        const fadeEnd = -currentCard.offsetWidth;
+        const clampedDx = Math.max(fadeEnd, dx);
+        const opacity = 1 + (clampedDx / Math.abs(fadeEnd));
+        currentCard.style.opacity = Math.max(opacity, 0.2);
 
-    // Proportionales Fading
-    const fadeEnd = -currentCard.offsetWidth;
-    const clampedDx = Math.max(fadeEnd, dx);
-    const opacity = 1 + (clampedDx / Math.abs(fadeEnd));
-    currentCard.style.opacity = Math.max(opacity, 0.2);
+        const threshold = currentCard.offsetWidth * 0.25;
+        if (Math.abs(dx) > threshold) {
+          autoSwiped = true;
+          currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+          currentCard.style.transform = `translateX(-100%)`;
+          currentCard.style.opacity = '0';
 
-    // Automatisches Auslösen ab 25 % Swipe
-    const threshold = currentCard.offsetWidth * 0.25;
-    if (Math.abs(dx) > threshold) {
-      autoSwiped = true;
-      currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-      currentCard.style.transform = `translateX(-100%)`;
-      currentCard.style.opacity = '0';
+          setTimeout(() => {
+  const cardId = currentCard.dataset.id;
 
-      setTimeout(() => {
-        if (currentCard) {
-          currentCard.remove();
-          currentCard = null;
+  if (currentFilter === 'gelöscht') {
+    let removed = JSON.parse(localStorage.getItem('removedCards')) || [];
+    removed = removed.filter(id => id !== cardId);
+    localStorage.setItem('removedCards', JSON.stringify(removed));
+  } else {
+    permanentlyRemoveCard(cardId);
+  }
+
+  currentCard.remove();
+  currentCard = null;
+}, 300);
+          isDragging = false;
         }
-      }, 300);
+      }
+    }
+
+    function endSwipe(x) {
+      if (!isDragging || !currentCard || autoSwiped) return;
+      const diff = startX - x;
+      const cardWidth = currentCard.offsetWidth;
+      const percentSwiped = diff / cardWidth;
+
+      currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+      if (percentSwiped > 0.25) {
+        currentCard.style.transform = 'translateX(-100%)';
+        currentCard.style.opacity = '0';
+        setTimeout(() => {
+  const cardId = currentCard.dataset.id;
+
+  if (currentFilter === 'gelöscht') {
+    let removed = JSON.parse(localStorage.getItem('removedCards')) || [];
+    removed = removed.filter(id => id !== cardId);
+    localStorage.setItem('removedCards', JSON.stringify(removed));
+  } else {
+    permanentlyRemoveCard(cardId);
+  }
+
+  currentCard.remove();
+}, 300);
+      } else {
+        currentCard.style.transform = 'translateX(0)';
+        currentCard.style.opacity = '1';
+      }
 
       isDragging = false;
+      currentCard = null;
     }
-  }
-}
 
-   function endSwipe(x) {
-  if (!isDragging || !currentCard || autoSwiped) return;
-  const diff = startX - x;
-
-  currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-
-  if (diff > 80) {
-    currentCard.classList.add('swipe-left');
-    setTimeout(() => {
-      currentCard.remove();
-    }, 300);
-  } else {
-    currentCard.style.transform = 'translateX(0)';
-    currentCard.style.opacity = '1';
-  }
-
-  isDragging = false;
-  currentCard = null;
-}
-
-    // Touch-Events
     function handleTouchStart(e, el) {
       startSwipe(e.touches[0].clientX, el);
     }
@@ -510,7 +717,6 @@
       endSwipe(e.changedTouches[0].clientX);
     }
 
-    // Maus-Events
     function handleMouseDown(e, el) {
       startSwipe(e.clientX, el);
       document.addEventListener('mousemove', handleMouseMove);
@@ -526,6 +732,52 @@
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCards();
+    });
   </script>
+  <!-- 📌 Info-Popup Container (am Ende vom <body>) -->
+<div id="info-popup" class="info-popup" style="display: none;">
+  <div class="info-content">
+    <button class="close-button" onclick="closeInfo()">×</button>
+    <p id="info-text">Hier steht der Infotext...</p>
+  </div>
+</div>
+
+<script>
+  const infoTexts = {
+    'card-btc': `Bitcoin ist offiziell in die US CryptoReserve aufgenommen worden. Die neue Digitalwährungsreserve ergänzt künftig Gold- und Devisenbestände der Vereinigten Staaten. Ex-Präsident Donald J. Trump begrüßte die Entscheidung als „Schritt in Richtung technologischer Vorreiterrolle“, forderte aber zugleich „klare Regelwerke“, um Privatanleger vor möglichen Risiken zu schützen.`,
+    
+    'card-fed': `Die US-Notenbank Federal Reserve hat gerade auf ihrer Sitzung den Leitzins unverändert im Korridor von 4,25 %–4,50 % belassen. Fed-Chef Jerome Powell wies darauf hin, dass die Kerninflationsrate von 2,7 % noch zu hoch sei, um Zinssenkungen zu rechtfertigen, und hob die anhaltenden Effekte der Zollpolitik hervor.`,
+
+    'card-apple': `Apple-CEO Tim Cook hat gerade 108.136 Apple-Aktien im Wert von rund 24,2 Mio. USD verkauft. Die Transaktionen erfolgten laut SEC-Meldung zu Kursen zwischen 221,77 und 224,76 USD pro Aktie. Das verkaufte Paket stammte aus gerade erst vesteten Restricted Stock Units.`,
+
+    'card-zoll': `Donald J. Trump kündigte gerade an, Zölle von 30 % auf alle Wareneinfuhren aus der EU und Mexiko zu erheben. Die Maßnahme soll innerhalb von 60 Tagen in Kraft treten und zielt laut Trump auf „fairen Handel“ und den Schutz amerikanischer Arbeitsplätze ab.`,
+
+    'card-china': `Donald J. Trump kündigte heute zum „Liberation Day“ Strafzölle von 30 % auf Importe aus China an. Er begründete den Schritt mit „unfairen Handelspraktiken“ Pekings und dem Schutz amerikanischer Arbeitsplätze.`,
+
+    'card-zins': `Die Federal Reserve hat gerade die Protokolle der FOMC-Sitzung veröffentlicht. Sie zeigen, dass nur „ein paar“ Mitglieder eine Zinssenkung noch in diesem Monat befürworteten, während die Mehrheit weiter vor Inflation durch US-Zölle warnte. Die Märkte peilen nun eine erste Senkung im September an.`
+  };
+</script>
+
+<script>
+  function openInfo(cardId) {
+    const text = infoTexts[cardId] || 'Keine Information verfügbar.';
+    document.getElementById('info-text').textContent = text;
+    document.getElementById('info-popup').style.display = 'flex';
+  }
+
+  function closeInfo() {
+    document.getElementById('info-popup').style.display = 'none';
+  }
+</script>
+
+<div id="info-popup" class="info-popup" style="display: none;">
+  <div class="info-content">
+    <button class="close-button" onclick="closeInfo()">×</button>
+    <p id="info-text">Hier steht der Infotext...</p>
+  </div>
+</div>
 </body>
 </html>

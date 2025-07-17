@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App-Tutorial</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .mockup {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: url('assets/mockup-home.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+
+    .highlight {
+      position: absolute;
+      z-index: 2;
+      border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.4);      transition: all 0.4s ease;
+    }
+
+    .explanation {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.2rem;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .click-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="mockup">
+    <div class="overlay" id="darkener"></div>
+    <div class="highlight" id="highlightBox"></div>
+    <div class="explanation" id="explanationText">Das ist der Favoriten-Button. Damit kannst du Nachrichten merken.</div>
+    <div class="click-overlay" onclick="nextStep()"></div>
+  </div>
+
+  <script>
+  const steps = [
+    {
+      selector: {
+        top: '74.2%',
+        left: '92%',
+        width: '35px',
+        height: '35px'
+      },
+      text: '⭐ Dies ist der Favoriten-Button. Klicke, um Beiträge zu speichern.'
+    },
+    {
+      selector: {
+        top: '74.2%',
+        left: '90.1%',
+        width: '35px',
+        height: '35px'
+      },
+      text: 'ⓘ Hier findest du weitere Informationen zum Beitrag.'
+    },
+    {
+      selector: {
+        top: '11%',
+        left: '11%',
+        width: '100px',
+        height: '35px'
+      },
+      text: '📂 Über das Filtermenü kannst du Beiträge filtern (z. B. Favoriten).'
+    }
+  ];
+
+  let currentStep = 0;
+
+  function nextStep() {
+    currentStep++;
+    if (currentStep >= steps.length) {
+      window.location.href = 'home.html';
+      return;
+    }
+
+    const step = steps[currentStep];
+    const box = document.getElementById('highlightBox');
+    const text = document.getElementById('explanationText');
+
+    box.style.top = step.selector.top;
+    box.style.left = step.selector.left;
+    box.style.width = step.selector.width;
+    box.style.height = step.selector.height;
+    text.textContent = step.text;
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const step = steps[0];
+    const box = document.getElementById('highlightBox');
+    const text = document.getElementById('explanationText');
+
+    box.style.top = step.selector.top;
+    box.style.left = step.selector.left;
+    box.style.width = step.selector.width;
+    box.style.height = step.selector.height;
+    text.textContent = step.text;
+  });
+</script>
+</body>
+</html>
