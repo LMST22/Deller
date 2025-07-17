@@ -26,7 +26,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url("assets/Candle.png");
+      background-image: url("/HedgeFin/HedgeFin/assets/Candle.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -128,19 +128,19 @@
 <body>
 
   <div class="logo">
-    <img src="assets/Logo.png" alt="HedgeFin" />
+    <img src="/HedgeFin/HedgeFin/assets/Logo.png" alt="HedgeFin" />
   </div>
 
   <div class="login-container">
     <!-- Bild direkt über dem Container -->
     <div class="frau-bild-wrapper">
-      <img src="assets/Frau.png" alt="Person" />
+      <img src="/HedgeFin/HedgeFin/assets/Frau.png" alt="Person" />
     </div>
 
     <input type="email" placeholder="E-Mail-Adresse..." />
     <input type="password" placeholder="Passwort..." />
     <div class="forgot-link">
-      <a href="passwort.html">Passwort vergessen?</a>
+      <a href="/HedgeFin/HedgeFin/passwort.html">Passwort vergessen?</a>
     </div>
     <button class="cta-button" onclick="handleLogin()">Anmelden</button>
   </div>
@@ -153,7 +153,7 @@
       if (email === '' || password === '') {
         alert('Bitte E-Mail-Adresse und Passwort eingeben.');
       } else {
-        window.location.href = 'Maerkte.html';
+        window.location.href = '/HedgeFin/HedgeFin/Maerkte.html';
       }
     }
   </script>
