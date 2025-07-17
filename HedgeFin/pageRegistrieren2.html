@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrierung</title>
   <style>
+    /* Grundlayout: Weißer, flex-zentrierter Hintergrund mit leichtem Chart-Bild */
     body {
       margin: 0;
       padding: 30px 20px 100px;
@@ -16,7 +17,7 @@
       overflow: hidden;
     }
 
- /* 🔽 Hintergrundbild */
+    /* Transparenter Kerzenchart als dezenter Hintergrund */
     body::before {
       content: "";
       position: fixed;
@@ -32,11 +33,13 @@
       z-index: -1;
     }
 
+    /* Überschrift der Seite */
     h1 {
       font-size: 26px;
       margin-bottom: 40px;
     }
 
+    /* Schrittweises Fortschritt-Layout */
     .steps {
       display: flex;
       flex-direction: column;
@@ -52,6 +55,7 @@
       position: relative;
     }
 
+    /* Kreis/Icon für jeden Schritt */
     .step-icon-wrapper {
       position: relative;
       display: flex;
@@ -59,6 +63,7 @@
       align-items: start;
     }
 
+    /* Linie zwischen den Schritten */
     .step:not(:last-child) .step-icon-wrapper::after {
       content: '';
       position: absolute;
@@ -70,6 +75,7 @@
       background-color: lightgray;
     }
 
+    /* Graue Kreise, erster Schritt blau */
     .circle {
       width: 8px;
       height: 8px;
@@ -82,6 +88,7 @@
       background-color: #3B82F6;
     }
 
+    /* App-Logo als Icon im letzten Schritt */
     .step-3-icon {
       width: 35px;
       height: 35px;
@@ -91,6 +98,7 @@
       margin-top: 1px;
     }
 
+    /* Text zum jeweiligen Schritt */
     .text {
       display: flex;
       flex-direction: column;
@@ -105,6 +113,7 @@
       color: gray;
     }
 
+    /* Rechtlicher Hinweis-Block mit weiterführenden Links */
     .disclaimer {
       font-size: 10px;
       color: #888;
@@ -113,12 +122,14 @@
       cursor: pointer;
     }
 
+    /* Rechts-links zu AGB/Datenschutz/Preisinfos im Disclaimer */
     .disclaimer a {
       color: #3B82F6;
       text-decoration: none;
       font-weight: 500;
     }
 
+    /* Weiter-Button, rechts unten positioniert */
     .cta {
       position: fixed;
       bottom: 20px;
@@ -139,6 +150,7 @@
       cursor: pointer;
     }
 
+    /* Optional: Dislaimer-Block als Link (wird oben als <div> genutzt) */
     .disclaimer-link {
       text-decoration: none;
       color: inherit;
@@ -149,6 +161,7 @@
       cursor: pointer;
     }
 
+    /* Zurück-Button links unten */
     .back {
       position: fixed;
       bottom: 20px;
@@ -158,8 +171,10 @@
 </head>
 <body>
 
+  <!-- Überschrift oben -->
   <h1>Registriere dich für<br>Dein Konto.</h1>
 
+  <!-- Fortschrittsanzeige (3 Schritte) -->
   <div class="steps">
     <div class="step step-1">
       <div class="step-icon-wrapper">
@@ -192,6 +207,7 @@
     </div>
   </div>
 
+  <!-- Rechtlicher Hinweis, gesamter Block klickbar (führt zu AGB-Seite) -->
   <div class="disclaimer" onclick="window.location.href='/HedgeFin/HedgeFin/pageAGBs.html'">
     Hiermit erstelle ich ein Konto. Ich bestätige, dass ich der 
     <a href="#" onclick="event.stopPropagation()">Kundenvereinbarung</a> und den 
@@ -203,12 +219,14 @@
     Verluste oder sonstige Schäden ausgeschlossen ist.
   </div>
 
+  <!-- Weiter-Button rechts unten -->
   <div class="cta">
     <button onclick="window.location.href='/HedgeFin/HedgeFin/pageRegistrieren3.html'">
       Weiter
     </button>
   </div>
 
+  <!-- Zurück-Button links unten -->
   <div class="back">
     <button onclick="window.location.href='/HedgeFin/HedgeFin/page2.html'">
       Zurück

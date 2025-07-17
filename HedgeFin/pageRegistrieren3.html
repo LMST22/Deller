@@ -4,14 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registrieren – Schritt 3</title>
+  <!-- Supabase-Import und Registrierung/Validierung im Frontend -->
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
   
+    // Supabase-Client initialisieren (Zugangsdaten)
     const supabase = createClient(
       'https://cpuxdumvnnsjovhvdkbe.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdXhkdW12bm5zam92aHZka2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4MjExNzEsImV4cCI6MjA2NTM5NzE3MX0.iTItHArkOpf_u2q-81w8LxTkbDJypZY4YXsn7TeIAy4'
     );
   
+    // Formularvalidierung und Nutzerregistrierung
     window.checkInputs = async function () {
       const firstname = document.getElementById('vorname').value.trim();
       const lastname = document.getElementById('nachname').value.trim();
@@ -24,6 +27,7 @@
   
       let valid = true;
   
+      // Prüfen, ob E-Mails übereinstimmen
       if (email1.value.trim() !== email2.value.trim()) {
         email1.classList.add('error');
         email2.classList.add('error');
@@ -35,6 +39,7 @@
         emailError.style.display = 'none';
       }
   
+      // Prüfen, ob E-Mail-Format gültig ist
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email1.value.trim()) || !emailRegex.test(email2.value.trim())) {
         email1.classList.add('error');
@@ -45,6 +50,7 @@
         emailFormatError.style.display = 'none';
       }
   
+      // Passwort-Check: mind. 8 Zeichen, mind. 1 Sonderzeichen, 1 Zahl
       const pwRegex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?])(?=.*\d).{8,}$/;
       if (!pwRegex.test(passwort.value)) {
         passwort.classList.add('error');
@@ -55,6 +61,7 @@
         pwError.style.display = 'none';
       }
   
+      // Wenn alle Felder valide: User in Supabase anlegen
       if (valid) {
         const { data, error } = await supabase
           .from('users')
@@ -78,6 +85,7 @@
     };
   </script>
   <style>
+    /* Seitenlayout: Weiß, mittig, flexbasiert, Chart-Overlay im Hintergrund */
     body {
       margin: 0;
       padding: 0;
@@ -105,6 +113,7 @@
       z-index: -1;
     }
 
+    /* Logo oben mittig */
     .logo {
       margin: 30px 0;
       text-align: center;
@@ -114,6 +123,7 @@
       height: 10vh;
     }
 
+    /* Formularkarte für Registrierung */
     .form-container {
       background-color: #f2f2f2;
       padding: 30px 20px;
@@ -130,6 +140,7 @@
       font-size: 20px;
     }
 
+    /* Abstände für die Eingabefelder */
     .form-group {
       margin-bottom: 16px;
     }
@@ -143,10 +154,12 @@
       box-sizing: border-box;
     }
 
+    /* Fehlerhafte Felder rot umrandet */
     .form-group input.error {
       border-color: red;
     }
 
+    /* Hinweis unter dem Passwortfeld */
     .passwort-hinweis {
       font-size: 12px;
       color: #888;
@@ -154,6 +167,7 @@
       margin-left: 4px;
     }
 
+    /* Fehlermeldungen unter den Feldern */
     .error-message {
       color: red;
       font-size: 12px;
@@ -162,6 +176,7 @@
       text-align: center;
     }
 
+    /* Call-to-Action-Button */
     .cta-button {
       background-color: #111;
       color: white;
@@ -174,6 +189,7 @@
       cursor: pointer;
     }
 
+    /* Zurück-Button links unten */
     .back {
       position: fixed;
       bottom: 20px;
@@ -196,10 +212,12 @@
 </head>
 <body>
 
+  <!-- Logo oben -->
   <div class="logo">
     <img src="assets/Logo.png" alt="SIGNAL INTEL" />
   </div>
 
+  <!-- Formular für Benutzerregistrierung -->
   <div class="form-container">
     <h2>Deine Registrierung</h2>
 
@@ -224,25 +242,31 @@
       <div class="passwort-hinweis">(mind. 8 Zeichen, 1 Sonderzeichen, 1 Zahl)</div>
     </div>
 
+    <!-- Fehlerhinweise für Validierung -->
     <div class="error-message" id="email-error">Die E-Mail-Adressen müssen übereinstimmen</div>
     <div class="error-message" id="email-format-error">Bitte gib eine gültige E-Mail-Adresse ein</div>
     <div class="error-message" id="pw-error">Passwort entspricht nicht den Anforderungen</div>
 
+    <!-- Registrierung abschließen -->
     <button class="cta-button" onclick="checkInputs()">Registrieren</button>
   </div>
 
+  <!-- Zurück-Button unten links -->
   <div class="back">
     <button onclick="window.location.href='/HedgeFin/HedgeFin/pageRegistrieren2.html'">
       Zurück
     </button>
   </div>
 
+  <!-- (Achtung: In deinem HTML gibt es zwei verschiedene Supabase-Initialisierungen! Nur eine sollte aktiv sein.) -->
   <script>
+    // Alternative Supabase-Initialisierung, falls kein <script type="module"> genutzt wird
     const supabase = supabase.createClient(
       'https://cpuxdumvnnsjovhvdkbe.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdXhkdW12bm5zam92aHZka2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4MjExNzEsImV4cCI6MjA2NTM5NzE3MX0.iTItHArkOpf_u2q-81w8LxTkbDJypZY4YXsn7TeIAy4'
     );
   
+    // Die gleiche checkInputs()-Funktion wie im oberen Modul-Skript
     async function checkInputs() {
       const firstname = document.getElementById('vorname').value.trim();
       const lastname = document.getElementById('nachname').value.trim();
@@ -296,7 +320,7 @@
             password_hash: passwort.value
           }]);
   
-        // 🐞 Debug-Ausgabe
+        // Debug-Log
         console.log("Insert Ergebnis:", { data, error });
   
         if (error) {

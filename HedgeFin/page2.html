@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Einloggen / Registrieren</title>
   <style>
+    /* Basiseinstellungen und Layout */
     * {
       box-sizing: border-box;
     }
@@ -21,6 +22,7 @@
       overflow: hidden;
     }
 
+    /* Punkt-Navigation für die Slideshow */
     .slideshow-dots {
       display: flex;
       justify-content: center;
@@ -41,6 +43,7 @@
       background-color: #111;
     }
 
+    /* Bereich für Bild und Buttons in der Mitte */
     .middle-section {
       display: flex;
       flex-direction: column;
@@ -51,6 +54,7 @@
       position: relative;
     }
 
+    /* Bildcontainer für die Slideshow */
     .image-container {
       display: flex;
       justify-content: center;
@@ -64,6 +68,7 @@
       border-radius: 10px;
     }
 
+    /* Button-Layout unter dem Bild */
     .button-wrapper {
       display: flex;
       justify-content: center;
@@ -74,6 +79,7 @@
       transform: translateX(-50%);
     }
 
+    /* Buttons fürs Einloggen und Registrieren */
     .text-button,
     .solid-button {
       font-size: 1rem;
@@ -105,18 +111,21 @@
 </head>
 <body>
 
+  <!-- Navigationspunkte für die Slideshow oben -->
   <div class="slideshow-dots">
     <div class="dot" id="dot1"></div>
     <div class="dot" id="dot2"></div>
     <div class="dot" id="dot3"></div>
   </div>
 
-  <!-- vertikal mittiger Bereich -->
+  <!-- Hauptbereich: Bild und darunter die Buttons -->
   <div class="middle-section">
     <div class="image-container">
+      <!-- Slideshow-Bild -->
       <img id="slideshow" src="/HedgeFin/HedgeFin/assets/Slideshow1.png" alt="Slideshow" />
     </div>
 
+    <!-- Login/Registrierungs-Buttons -->
     <div class="button-wrapper">
       <button class="text-button" onclick="location.href='/HedgeFin/HedgeFin/pageEinloggen.html'">
         Einloggen
@@ -128,12 +137,14 @@
   </div>
 
   <script>
+    // Bilder für die Slideshow
     const images = [
       '/HedgeFin/HedgeFin/assets/Slideshow1.png',
       '/HedgeFin/HedgeFin/assets/Slideshow2.png',
       '/HedgeFin/HedgeFin/assets/Slideshow3.png'
     ];
 
+    // Aktueller Bild-Index & DOM-Elemente
     let currentIndex = 0;
     const slideshow = document.getElementById('slideshow');
     const dots = [
@@ -142,11 +153,13 @@
       document.getElementById('dot3')
     ];
 
+    // Preload der Bilder (für flüssigere Slideshow)
     images.forEach(src => {
       const img = new Image();
       img.src = src;
     });
 
+    // Slideshow-Bild und Dots aktualisieren
     function updateSlideshow() {
       slideshow.src = images[currentIndex];
       dots.forEach((dot, index) => {
@@ -154,11 +167,13 @@
       });
     }
 
+    // Automatischer Bildwechsel alle 3 Sekunden
     setInterval(() => {
       currentIndex = (currentIndex + 1) % images.length;
       updateSlideshow();
     }, 3000);
 
+    // Initial anzeigen
     updateSlideshow();
   </script>
 </body>

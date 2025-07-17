@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>2-Faktor-Authentifizierung</title>
   <style>
+    /* Basis-Layout für zentrierte Darstellung auf weißem Hintergrund */
     body {
       margin: 0;
       padding: 40px 20px;
@@ -17,6 +18,7 @@
       min-height: 100vh;
     }
 
+    /* Bereich für das Logo oben */
     .logo {
       margin-bottom: 30px;
     }
@@ -25,6 +27,7 @@
       height: 200px;
     }
 
+    /* Infotext unter dem Logo */
     .info {
       text-align: center;
       max-width: 320px;
@@ -33,6 +36,7 @@
       margin-bottom: 40px;
     }
 
+    /* Eingabefelder für den 6-stelligen Code, nebeneinander */
     .code-inputs {
       display: flex;
       gap: 10px;
@@ -48,6 +52,7 @@
       border-radius: 8px;
     }
 
+    /* Fehlermeldung (bei ungültigem Code) */
     .error {
       color: red;
       font-size: 14px;
@@ -55,6 +60,7 @@
       display: none;
     }
 
+    /* Button unten rechts positioniert */
     .cta {
       position: fixed;
       bottom: 20px;
@@ -75,15 +81,18 @@
 </head>
 <body>
 
+  <!-- Logo oben -->
   <div class="logo">
     <img src="/HedgeFin/HedgeFin/assets/Logo.png" alt="HedgeFin">
   </div>
 
+  <!-- Hinweistext für die Bestätigungs-E-Mail -->
   <div class="info">
     Wir haben dir soeben eine 2-Faktor-Authentifizierungs-Bestätigungs-Mail geschickt.<br>
     Bitte schau in deinen E-Mails nach, eventuell auch in deinem Spam-Ordner.
   </div>
 
+  <!-- Eingabefelder für den 6-stelligen Code (jeder Ziffer ein eigenes Feld) -->
   <div class="code-inputs" id="codeContainer">
     <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
     <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
@@ -93,17 +102,21 @@
     <input type="text" maxlength="1" inputmode="numeric" class="code-input" />
   </div>
 
+  <!-- Fehlermeldung (standardmäßig versteckt) -->
   <div class="error" id="code-error">
     Bitte gib einen gültigen 6-stelligen Code ein.
   </div>
 
+  <!-- Call-to-Action Button zum Abschließen der Registrierung -->
   <div class="cta">
     <button onclick="checkCode()">Registrierung abschließen</button>
   </div>
 
   <script>
+    // Holt alle Eingabefelder für den Code
     const inputs = document.querySelectorAll('.code-input');
 
+    // Automatisches Springen zum nächsten Feld nach Eingabe, Rücksprung bei Backspace
     inputs.forEach((input, index) => {
       input.addEventListener('input', (e) => {
         const value = e.target.value;
@@ -119,6 +132,7 @@
       });
     });
 
+    // Ermöglicht das Einfügen des Codes per Copy & Paste über alle Felder hinweg
     document.getElementById('codeContainer').addEventListener('paste', function (e) {
       e.preventDefault();
       const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
@@ -129,6 +143,7 @@
       nextInput.focus();
     });
 
+    // Prüft, ob ein 6-stelliger Code eingegeben wurde; wenn ja, weiterleiten, sonst Fehlermeldung anzeigen
     function checkCode() {
       const code = Array.from(inputs).map(input => input.value).join('');
       const errorDiv = document.getElementById('code-error');

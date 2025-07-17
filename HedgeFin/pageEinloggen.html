@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <style>
+    /* Grundlegendes Layout: Hintergrundbild, Schrift, Flexbox-Zentrierung */
     body {
       margin: 0;
       padding: 0;
@@ -19,6 +20,7 @@
       overflow: hidden;
     }
 
+    /* Überlagertes, sehr transparentes Kerzen-Chart */
     body::before {
       content: "";
       position: fixed;
@@ -34,6 +36,7 @@
       z-index: -1;
     }
 
+    /* Logo oben mittig */
     .logo {
       margin-top: 5vh;
       text-align: center;
@@ -44,6 +47,7 @@
       height: 12vh;
     }
 
+    /* Login-Container als Card am unteren Bildschirmrand */
     .login-container {
       background-color: #111;
       color: white;
@@ -60,9 +64,10 @@
       align-items: center;
     }
 
+    /* Illustration (Frau) schwebt über dem Container */
     .frau-bild-wrapper {
       position: absolute;
-      top: -30vh; /* sitzt direkt über dem Container */
+      top: -30vh;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
@@ -76,6 +81,7 @@
       object-fit: contain;
     }
 
+    /* Styling für Input-Felder */
     .login-container input {
       width: 100%;
       padding: 2.5vh;
@@ -88,10 +94,12 @@
       box-sizing: border-box;
     }
 
+    /* Platzhalterfarbe */
     .login-container input::placeholder {
       color: #aaa;
     }
 
+    /* Link "Passwort vergessen" rechtsbündig unter Passwortfeld */
     .forgot-link {
       text-align: right;
       margin-top: -1vh;
@@ -105,6 +113,7 @@
       text-decoration: none;
     }
 
+    /* CTA-Button: breite, helle Schaltfläche */
     .cta-button {
       background-color: white;
       color: black;
@@ -127,25 +136,30 @@
 </head>
 <body>
 
+  <!-- Logo im Kopfbereich -->
   <div class="logo">
     <img src="/HedgeFin/HedgeFin/assets/Logo.png" alt="HedgeFin" />
   </div>
 
+  <!-- Login-Card unten, enthält auch das Bild-Overlay -->
   <div class="login-container">
-    <!-- Bild direkt über dem Container -->
+    <!-- Frau-Bild als visuelles Element oberhalb des Containers -->
     <div class="frau-bild-wrapper">
       <img src="/HedgeFin/HedgeFin/assets/Frau.png" alt="Person" />
     </div>
 
+    <!-- Eingabefelder für E-Mail und Passwort -->
     <input type="email" placeholder="E-Mail-Adresse..." />
     <input type="password" placeholder="Passwort..." />
     <div class="forgot-link">
       <a href="/HedgeFin/HedgeFin/passwort.html">Passwort vergessen?</a>
     </div>
+    <!-- Anmelde-Button -->
     <button class="cta-button" onclick="handleLogin()">Anmelden</button>
   </div>
 
   <script>
+    // Einfache Login-Validierung (nur leere Felder prüfen, Weiterleitung)
     function handleLogin() {
       const email = document.querySelector('input[type="email"]').value.trim();
       const password = document.querySelector('input[type="password"]').value.trim();

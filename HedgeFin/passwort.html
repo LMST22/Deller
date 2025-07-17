@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Passwort vergessen</title>
   <style>
+    /* Grundlayout: Flex, Hintergrundbild, vertikal zentriert */
     body {
       margin: 0;
       padding: 0;
@@ -17,6 +18,7 @@
       min-height: 100vh;
     }
 
+    /* Logo oben, großzügig */
     .logo {
       margin-top: 30px;
       text-align: center;
@@ -26,6 +28,7 @@
       height: 300px;
     }
 
+    /* Container für das Passwort-Reset-Feld */
     .reset-container {
       background-color: #111;
       color: white;
@@ -38,12 +41,14 @@
       box-sizing: border-box;
     }
 
+    /* Überschrift im Container */
     .reset-container h2 {
       margin-top: 0;
       font-size: 18px;
       margin-bottom: 20px;
     }
 
+    /* Eingabefeld für die E-Mail */
     .reset-container input {
       width: 100%;
       padding: 14px;
@@ -60,6 +65,7 @@
       color: #aaa;
     }
 
+    /* Button für das Zurücksetzen */
     .cta-button {
       background-color: white;
       color: black;
@@ -82,10 +88,12 @@
 </head>
 <body>
 
+  <!-- Logo-Block -->
   <div class="logo">
     <img src="/HedgeFin/HedgeFin/assets/Logo.png" alt="SIGNAL INTEL" />
   </div>
 
+  <!-- Eingabefeld für E-Mail und Reset-Button -->
   <div class="reset-container">
     <h2>Passwort zurücksetzen</h2>
     <input type="email" id="email" placeholder="E-Mail-Adresse..." />
@@ -93,6 +101,7 @@
   </div>
 
   <script>
+    // Einfache Prüfung: Ist E-Mail eingegeben? (API-Aufruf kann hier ergänzt werden)
     function handleReset() {
       const email = document.getElementById('email').value.trim();
       if (!email) {
@@ -100,7 +109,7 @@
         return;
       }
 
-      // Hier kannst du später API-Aufruf einbauen (z. B. Supabase / Firebase)
+      // Hinweis: Hier könnte man z. B. Supabase/Firebase Reset-Funktion aufrufen
       alert("Wenn diese Adresse registriert ist, senden wir dir einen Link.");
     }
   </script>

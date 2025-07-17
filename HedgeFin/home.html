@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aktuelles</title>
   <style>
+    /* === GRUNDLEGENDES LAYOUT === */
+    /* Basis-Styling für den Body - Flexbox Layout für Vollbild-App */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -13,9 +15,11 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      overflow: hidden;
+      overflow: hidden; /* Verhindert Scrollen des gesamten Bodys */
     }
 
+    /* === HEADER MIT PROFIL-MENÜ === */
+    /* Header mit Titel und Profil-Button */
     header {
       display: flex;
       justify-content: space-between;
@@ -25,6 +29,7 @@
       font-weight: bold;
     }
 
+    /* Profil-Button Styling */
     .profile-button {
       background: none;
       border: none;
@@ -32,6 +37,7 @@
       cursor: pointer;
     }
 
+    /* Runder Profil-Icon Container */
     .profile-icon {
       width: 5vh;
       height: 5vh;
@@ -47,9 +53,10 @@
       width: 70%;
       height: 70%;
       object-fit: contain;
-      filter: invert(1);
+      filter: invert(1); /* Macht das Icon weiß */
     }
 
+    /* Dropdown-Menü für das Profil (versteckt standardmäßig) */
     .profile-menu {
       position: absolute;
       top: 8vh;
@@ -59,7 +66,7 @@
       border: 4px solid #999;
       border-radius: 12px;
       padding: 16px;
-      display: none;
+      display: none; /* Versteckt bis aktiviert */
       flex-direction: column;
       align-items: center;
       gap: 16px;
@@ -67,9 +74,10 @@
     }
 
     .profile-menu.active {
-      display: flex;
+      display: flex; /* Zeigt das Menü an */
     }
 
+    /* Schließen-Button für das Profil-Menü */
     .close-button {
       position: absolute;
       top: 8px;
@@ -82,6 +90,7 @@
       cursor: pointer;
     }
 
+    /* Icon-Wrapper für das Profil-Menü */
     .icon-wrapper {
       width: 50px;
       height: 50px;
@@ -99,6 +108,7 @@
       filter: invert(1);
     }
 
+    /* Logout-Button Styling */
     .logout-button {
       background: #ffdddd;
       border: 3px solid red;
@@ -124,12 +134,16 @@
       border-color: darkred;
     }
 
+    /* === HAUPTINHALT === */
+    /* Scrollbarer Hauptinhalt zwischen Header und Footer */
     .content {
       flex: 1;
       overflow-y: auto;
       padding: 0 4vw 10vh;
     }
 
+    /* === SECTION LABELS === */
+    /* Farbige Labels für "Relevant" und "Unspektakulär" */
     .section-label {
       font-size: 2vh;
       font-weight: bold;
@@ -150,6 +164,8 @@
       font-weight: bold;
     }
 
+    /* === KARTEN-LAYOUT === */
+    /* Styling für die News-Karten */
     .card {
       display: flex;
       justify-content: space-between;
@@ -160,6 +176,7 @@
       margin-bottom: 2vh;
     }
 
+    /* Linke Seite der Karte mit Titel und Datum */
     .card-info {
       display: flex;
       flex-direction: column;
@@ -175,6 +192,7 @@
       color: #555;
     }
 
+    /* Rechte Seite der Karte mit Trend und Buttons */
     .card-right {
       display: flex;
       flex-direction: column;
@@ -182,6 +200,7 @@
       gap: 1vh;
     }
 
+    /* Trend-Farben für Aktien/Kurse */
     .green {
       color: green;
     }
@@ -190,6 +209,7 @@
       color: red;
     }
 
+    /* Favoriten-Button (Stern) */
     .favorite-button {
       background: none;
       border: none;
@@ -200,9 +220,11 @@
     }
 
     .favorite-button.favorited {
-      color: gold;
+      color: gold; /* Goldener Stern für favorisierte Items */
     }
 
+    /* === FILTER-DROPDOWN === */
+    /* Container für Filter-Dropdown */
     .filter-wrapper {
       position: relative;
       display: inline-block;
@@ -219,6 +241,7 @@
       padding: 1vh 2vw;
     }
 
+    /* Dropdown-Menü für Filter */
     .filter-dropdown {
       display: none;
       position: absolute;
@@ -248,9 +271,11 @@
     }
 
     .filter-wrapper:hover .filter-dropdown {
-      display: block;
+      display: block; /* Zeigt Dropdown bei Hover */
     }
 
+    /* === FOOTER MIT NAVIGATION === */
+    /* Footer mit Navigation (fixiert am unteren Bildschirmrand) */
     footer {
       display: flex;
       justify-content: space-around;
@@ -269,106 +294,100 @@
     }
 
     .active {
-      filter: hue-rotate(220deg);
+      filter: hue-rotate(220deg); /* Färbt das aktive Icon anders */
     }
 
+    /* === SWIPE-ANIMATIONEN === */
+    /* Animationen für das Swipen/Löschen von Karten */
     .card {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-.swipe-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
+    .swipe-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
 
-.card.fading {
-  opacity: 0.4;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
+    .card.fading {
+      opacity: 0.4;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-#relevant-container,
-#unspektakulaer-container {
-  min-height: 40vh; /* oder je nach gewünschter Mindesthöhe */
-}
+    /* Mindesthöhe für Container */
+    #relevant-container,
+    #unspektakulaer-container {
+      min-height: 40vh;
+    }
 
-.footer-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
+    .footer-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
 
-.info-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
+    /* === INFO-POPUP === */
+    /* Vollbild-Overlay für Info-Popups */
+    .info-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
 
-.info-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 90%;
-  width: 400px;
-  position: relative;
-  text-align: left;
-  font-size: 1rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
+    /* Inhalt des Info-Popups */
+    .info-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 90%;
+      width: 400px;
+      position: relative;
+      text-align: left;
+      font-size: 1rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
 
-.close-button {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-}
+    /* Info-Button (ⓘ) */
+    .info-button {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
 
-.info-button {
-  position: relative;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.info-button::after {
-  content: attr(data-info);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  white-space: normal;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  width: 220px;
-  z-index: 10;
-}
-
+    /* Weitere Info-Button Styles */
+    .info-button::after {
+      content: attr(data-info);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      white-space: normal;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      width: 220px;
+      z-index: 10;
+    }
 
   </style>
 
   <style>
+  /* === ZUSÄTZLICHE INFO-POPUP STYLES === */
   .info-popup {
     position: fixed;
     top: 0; left: 0;
@@ -428,15 +447,18 @@
 
 </head>
 <body>
+  <!-- === HEADER BEREICH === -->
   <header>
     Aktuelles
 
+    <!-- Profil-Button mit Dropdown-Menü -->
     <button class="profile-button" onclick="toggleProfileMenu()" aria-label="Benutzer öffnen">
       <div class="profile-icon">
         <img src="/HedgeFin/HedgeFin/assets/Benutzer.png" alt="Benutzer" />
       </div>
     </button>
 
+    <!-- Verstecktes Profil-Menü -->
     <div class="profile-menu" id="profileMenu">
       <button class="close-button" onclick="toggleProfileMenu()">×</button>
       <div class="icon-wrapper">
@@ -446,26 +468,32 @@
     </div>
   </header>
 
+  <!-- === HAUPTINHALT === -->
   <div class="content">
+    <!-- "Relevant" Sektion -->
     <div class="section-label red-label">Relevant</div>
 
+    <!-- Filter-Dropdown -->
     <div class="filter-wrapper">
       <button class="filter-button">Filter ▾</button>
       <div class="filter-dropdown">
         <button onclick="setFilter('alle')">Alle</button>
         <button onclick="setFilter('favoriten')">Favoriten</button>
-        <button onclick="setFilter('gelöscht')">Gelöscht</button> <!-- NEU -->
+        <button onclick="setFilter('gelöscht')">Gelöscht</button>
       </div>
     </div>
 
+    <!-- Container für relevante News-Karten -->
     <div id="relevant-container"></div>
 
+    <!-- "Unspektakulär" Sektion -->
     <div style="margin-top: 4vh;">
       <div class="section-label purple-label">Unspektakulär</div>
       <div id="unspektakulaer-container"></div>
     </div>
   </div>
 
+  <!-- === FOOTER MIT NAVIGATION === -->
   <footer>
   <button class="footer-btn" aria-label="News">
     <img src="/HedgeFin/HedgeFin/assets/icon-news.PNG" alt="News" class="active" />
@@ -483,6 +511,8 @@
 </footer>
 
   <script>
+    // === DATEN FÜR NEWS-KARTEN ===
+    // Array mit allen News-Karten Daten
     const cardsData = [
       {
         id: 'card-btc',
@@ -510,7 +540,7 @@
       },
       {
         id: 'card-zoll',
-        title: 'Trump kündigt 30 % Zölle auf EU und Mexiko an',
+        title: 'Trump kündigt 30 % Zölle auf EU und Mexiko an',
         date: '11. Juli 2025',
         category: 'unspektakulaer',
         trend: 'red',
@@ -518,7 +548,7 @@
       },
       {
         id: 'card-china',
-        title: 'Trump „Liberation Day“-Zölle gegen China',
+        title: 'Trump „Liberation Day"-Zölle gegen China',
         date: '3. April 2025',
         category: 'unspektakulaer',
         trend: 'red',
@@ -534,12 +564,16 @@
       }
     ];
 
+    // Aktueller Filter-Status
     let currentFilter = 'alle';
 
+    // === PROFIL-MENÜ FUNKTIONEN ===
     function toggleProfileMenu() {
       document.getElementById("profileMenu").classList.toggle("active");
     }
 
+    // === FAVORITEN-FUNKTIONEN ===
+    // Favoriten-Status umschalten und in LocalStorage speichern
     function toggleFavorite(button) {
       const card = button.closest('.card');
       const cardId = card.dataset.id;
@@ -557,6 +591,8 @@
       renderCards(currentFilter);
     }
 
+    // === KARTEN-LÖSCHFUNKTIONEN ===
+    // Karte permanent aus der Anzeige entfernen
     function permanentlyRemoveCard(cardId) {
       let removed = JSON.parse(localStorage.getItem('removedCards')) || [];
       if (!removed.includes(cardId)) {
@@ -565,6 +601,8 @@
       }
     }
 
+    // === HAUPT-RENDER-FUNKTION ===
+    // Rendert alle Karten basierend auf dem aktuellen Filter
     function renderCards(filter = 'alle') {
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   const removed = JSON.parse(localStorage.getItem('removedCards')) || [];
@@ -573,29 +611,35 @@
   const relevantContainer = document.getElementById('relevant-container');
   const unspektakulaerContainer = document.getElementById('unspektakulaer-container');
 
-  // Container leeren
+  // Container leeren vor dem Neurendern
   relevantContainer.innerHTML = '';
   unspektakulaerContainer.innerHTML = '';
 
+  // Durch alle Karten iterieren und basierend auf Filter anzeigen
   cardsData.forEach(card => {
     const isFav = favorites.includes(card.id);
     const isDeleted = removed.includes(card.id);
 
+    // Filter-Logik
     if (!showDeleted && isDeleted) return;
     if (showDeleted && !isDeleted) return;
     if (filter === 'favoriten' && !isFav) return;
 
+    // Bestimme den richtigen Container
     const container = card.category === 'relevant' ? relevantContainer : unspektakulaerContainer;
 
+    // Erstelle Karten-Element
     const el = document.createElement('div');
     el.className = 'card';
     el.dataset.id = card.id;
 
+    // Touch- und Mouse-Event-Handler für Swipe-Funktionalität
     el.setAttribute('onmousedown', 'handleMouseDown(event, this)');
     el.setAttribute('ontouchstart', 'handleTouchStart(event, this)');
     el.setAttribute('ontouchmove', 'handleTouchMove(event)');
     el.setAttribute('ontouchend', 'handleTouchEnd(event)');
 
+    // HTML-Inhalt der Karte
     el.innerHTML = `
       <div class="card-info">
         <div class="card-header">${card.title}</div>
@@ -616,16 +660,20 @@
   });
 }
 
+    // === FILTER-FUNKTIONEN ===
     function setFilter(filter) {
       currentFilter = filter;
       renderCards(filter);
     }
 
+    // === SWIPE-FUNKTIONALITÄT ===
+    // Variablen für Swipe-Gesten
     let startX = 0;
     let currentCard = null;
     let isDragging = false;
     let autoSwiped = false;
 
+    // Startet die Swipe-Geste
     function startSwipe(x, el) {
       startX = x;
       currentCard = el;
@@ -635,6 +683,7 @@
       currentCard.style.opacity = '1';
     }
 
+    // Verarbeitet die Bewegung während des Swipes
     function moveSwipe(x) {
       if (!isDragging || !currentCard || autoSwiped) return;
       const dx = x - startX;
@@ -646,6 +695,7 @@
         const opacity = 1 + (clampedDx / Math.abs(fadeEnd));
         currentCard.style.opacity = Math.max(opacity, 0.2);
 
+        // Auto-Swipe bei 25% der Kartenbreite
         const threshold = currentCard.offsetWidth * 0.25;
         if (Math.abs(dx) > threshold) {
           autoSwiped = true;
@@ -653,14 +703,17 @@
           currentCard.style.transform = `translateX(-100%)`;
           currentCard.style.opacity = '0';
 
+          // Karte nach Animation entfernen
           setTimeout(() => {
   const cardId = currentCard.dataset.id;
 
   if (currentFilter === 'gelöscht') {
+    // Karte wiederherstellen
     let removed = JSON.parse(localStorage.getItem('removedCards')) || [];
     removed = removed.filter(id => id !== cardId);
     localStorage.setItem('removedCards', JSON.stringify(removed));
   } else {
+    // Karte löschen
     permanentlyRemoveCard(cardId);
   }
 
@@ -672,6 +725,7 @@
       }
     }
 
+    // Beendet die Swipe-Geste
     function endSwipe(x) {
       if (!isDragging || !currentCard || autoSwiped) return;
       const diff = startX - x;
@@ -681,6 +735,7 @@
       currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
       if (percentSwiped > 0.25) {
+        // Karte komplett wegswipen
         currentCard.style.transform = 'translateX(-100%)';
         currentCard.style.opacity = '0';
         setTimeout(() => {
@@ -697,6 +752,7 @@
   currentCard.remove();
 }, 300);
       } else {
+        // Karte zurückspringen lassen
         currentCard.style.transform = 'translateX(0)';
         currentCard.style.opacity = '1';
       }
@@ -705,6 +761,7 @@
       currentCard = null;
     }
 
+    // === TOUCH-EVENT-HANDLER ===
     function handleTouchStart(e, el) {
       startSwipe(e.touches[0].clientX, el);
     }
@@ -717,6 +774,7 @@
       endSwipe(e.changedTouches[0].clientX);
     }
 
+    // === MOUSE-EVENT-HANDLER ===
     function handleMouseDown(e, el) {
       startSwipe(e.clientX, el);
       document.addEventListener('mousemove', handleMouseMove);
@@ -733,11 +791,14 @@
       document.removeEventListener('mouseup', handleMouseUp);
     }
 
+    // === INITIALISIERUNG ===
+    // Rendert die Karten beim Laden der Seite
     window.addEventListener('DOMContentLoaded', () => {
       renderCards();
     });
   </script>
-  <!-- 📌 Info-Popup Container (am Ende vom <body>) -->
+  
+  <!-- === INFO-POPUP HTML === -->
 <div id="info-popup" class="info-popup" style="display: none;">
   <div class="info-content">
     <button class="close-button" onclick="closeInfo()">×</button>
@@ -746,33 +807,39 @@
 </div>
 
 <script>
+  // === INFO-TEXTE FÜR POPUP ===
+  // Detaillierte Informationen für jede News-Karte
   const infoTexts = {
-    'card-btc': `Bitcoin ist offiziell in die US CryptoReserve aufgenommen worden. Die neue Digitalwährungsreserve ergänzt künftig Gold- und Devisenbestände der Vereinigten Staaten. Ex-Präsident Donald J. Trump begrüßte die Entscheidung als „Schritt in Richtung technologischer Vorreiterrolle“, forderte aber zugleich „klare Regelwerke“, um Privatanleger vor möglichen Risiken zu schützen.`,
+    'card-btc': `Bitcoin ist offiziell in die US CryptoReserve aufgenommen worden. Die neue Digitalwährungsreserve ergänzt künftig Gold- und Devisenbestände der Vereinigten Staaten. Ex-Präsident Donald J. Trump begrüßte die Entscheidung als „Schritt in Richtung technologischer Vorreiterrolle", forderte aber zugleich „klare Regelwerke", um Privatanleger vor möglichen Risiken zu schützen.`,
     
     'card-fed': `Die US-Notenbank Federal Reserve hat gerade auf ihrer Sitzung den Leitzins unverändert im Korridor von 4,25 %–4,50 % belassen. Fed-Chef Jerome Powell wies darauf hin, dass die Kerninflationsrate von 2,7 % noch zu hoch sei, um Zinssenkungen zu rechtfertigen, und hob die anhaltenden Effekte der Zollpolitik hervor.`,
 
     'card-apple': `Apple-CEO Tim Cook hat gerade 108.136 Apple-Aktien im Wert von rund 24,2 Mio. USD verkauft. Die Transaktionen erfolgten laut SEC-Meldung zu Kursen zwischen 221,77 und 224,76 USD pro Aktie. Das verkaufte Paket stammte aus gerade erst vesteten Restricted Stock Units.`,
 
-    'card-zoll': `Donald J. Trump kündigte gerade an, Zölle von 30 % auf alle Wareneinfuhren aus der EU und Mexiko zu erheben. Die Maßnahme soll innerhalb von 60 Tagen in Kraft treten und zielt laut Trump auf „fairen Handel“ und den Schutz amerikanischer Arbeitsplätze ab.`,
+    'card-zoll': `Donald J. Trump kündigte gerade an, Zölle von 30 % auf alle Wareneinfuhren aus der EU und Mexiko zu erheben. Die Maßnahme soll innerhalb von 60 Tagen in Kraft treten und zielt laut Trump auf „fairen Handel" und den Schutz amerikanischer Arbeitsplätze ab.`,
 
-    'card-china': `Donald J. Trump kündigte heute zum „Liberation Day“ Strafzölle von 30 % auf Importe aus China an. Er begründete den Schritt mit „unfairen Handelspraktiken“ Pekings und dem Schutz amerikanischer Arbeitsplätze.`,
+    'card-china': `Donald J. Trump kündigte heute zum „Liberation Day" Strafzölle von 30 % auf Importe aus China an. Er begründete den Schritt mit „unfairen Handelspraktiken" Pekings und dem Schutz amerikanischer Arbeitsplätze.`,
 
-    'card-zins': `Die Federal Reserve hat gerade die Protokolle der FOMC-Sitzung veröffentlicht. Sie zeigen, dass nur „ein paar“ Mitglieder eine Zinssenkung noch in diesem Monat befürworteten, während die Mehrheit weiter vor Inflation durch US-Zölle warnte. Die Märkte peilen nun eine erste Senkung im September an.`
+    'card-zins': `Die Federal Reserve hat gerade die Protokolle der FOMC-Sitzung veröffentlicht. Sie zeigen, dass nur „ein paar" Mitglieder eine Zinssenkung noch in diesem Monat befürworteten, während die Mehrheit weiter vor Inflation durch US-Zölle warnte. Die Märkte peilen nun eine erste Senkung im September an.`
   };
 </script>
 
 <script>
+  // === INFO-POPUP FUNKTIONEN ===
+  // Öffnet das Info-Popup mit entsprechendem Text
   function openInfo(cardId) {
     const text = infoTexts[cardId] || 'Keine Information verfügbar.';
     document.getElementById('info-text').textContent = text;
     document.getElementById('info-popup').style.display = 'flex';
   }
 
+  // Schließt das Info-Popup
   function closeInfo() {
     document.getElementById('info-popup').style.display = 'none';
   }
 </script>
 
+<!-- Info-Popup HTML (doppelt definiert im Original) -->
 <div id="info-popup" class="info-popup" style="display: none;">
   <div class="info-content">
     <button class="close-button" onclick="closeInfo()">×</button>

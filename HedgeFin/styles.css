@@ -1,9 +1,11 @@
+/* Setzt Standard-Boxmodell & entfernt Margin/Padding für alle Elemente */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Basis-Layout für den Body: Sans-Serif, weißer Hintergrund, volle Höhe, kein Scrollen */
 body {
   font-family: system-ui, sans-serif;
   background-color: white;
@@ -11,6 +13,7 @@ body {
   overflow: hidden;
 }
 
+/* Zentrierter Container für Landingpage-Inhalt (Logo & Text) */
 .landing-container {
   display: flex;
   flex-direction: column;
@@ -21,6 +24,7 @@ body {
   position: relative;
 }
 
+/* Logo-Mitte, nimmt so viel Platz wie möglich */
 .logo-container {
   flex: 1;
   display: flex;
@@ -29,6 +33,7 @@ body {
   width: 100%;
 }
 
+/* Responsive Skalierung und Begrenzung des Logos */
 .logo {
   max-width: 80%;
   max-height: 60vh;
@@ -37,6 +42,7 @@ body {
   object-fit: contain;
 }
 
+/* Text unter dem Logo, immer mittig und etwas vom Rand entfernt */
 .text-container {
   position: absolute;
   bottom: 80px;
@@ -44,6 +50,7 @@ body {
   transform: translateX(-50%);
 }
 
+/* Stil für den Hinweistext */
 .tap-text {
   font-size: 18px;
   color: #333;
@@ -52,7 +59,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Responsive Design */
+/* Responsive Design für kleinere Bildschirme */
 @media (max-width: 768px) {
   .logo {
     max-width: 90%;

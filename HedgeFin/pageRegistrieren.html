@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrierung</title>
   <style>
+    /* Grundlayout: weiße Seite, gepolstert, flex-zentriert, fixierter Hintergrund */
     body {
       margin: 0;
       padding: 30px 20px 100px;
@@ -18,7 +19,7 @@
       overflow: hidden;
     }
 
-    /* 🔽 Hintergrundbild */
+    /* Sehr dezentes Chart-Hintergrundbild für Atmosphäre */
     body::before {
       content: "";
       position: fixed;
@@ -34,11 +35,13 @@
       z-index: -1;
     }
 
+    /* Überschrift der Seite */
     h1 {
       font-size: 26px;
       margin-bottom: 40px;
     }
 
+    /* Stepper: Fortschrittsanzeige für Registrierungsschritte */
     .steps {
       display: flex;
       flex-direction: column;
@@ -46,6 +49,7 @@
       margin-left: 20px;
     }
 
+    /* Einzelner Schritt: Icon/Kreis und Text nebeneinander */
     .step {
       display: grid;
       grid-template-columns: 50px auto;
@@ -54,6 +58,7 @@
       position: relative;
     }
 
+    /* Positionierung des Icons / Kreises */
     .step-icon-wrapper {
       position: relative;
       display: flex;
@@ -61,6 +66,7 @@
       align-items: start;
     }
 
+    /* Vertikale Linie zwischen den Schritten */
     .step:not(:last-child) .step-icon-wrapper::after {
       content: '';
       position: absolute;
@@ -72,6 +78,7 @@
       background-color: lightgray;
     }
 
+    /* Kreis-Design für Stepper */
     .circle {
       width: 8px;
       height: 8px;
@@ -80,10 +87,12 @@
       margin-top: 3px;
     }
 
+    /* Erster Schritt hervorgehoben (blau) */
     .step-1 .circle {
       background-color: #3B82F6;
     }
 
+    /* App-Logo im letzten Schritt */
     .step-3-icon {
       width: 35px;
       height: 35px;
@@ -93,6 +102,7 @@
       margin-top: 1px;
     }
 
+    /* Step-Text (Überschrift und Zusatzinfo) */
     .text {
       display: flex;
       flex-direction: column;
@@ -107,6 +117,7 @@
       color: gray;
     }
 
+    /* Hinweis & Links zu rechtlichen Infos (AGB, Datenschutz etc.) */
     .disclaimer-link {
       font-size: 10px;
       color: #888;
@@ -117,6 +128,7 @@
       cursor: pointer;
     }
 
+    /* Blau hervorgehobene Linktexte */
     .disclaimer-link .linktext {
       color: #3B82F6;
       text-decoration: none;
@@ -127,12 +139,14 @@
       text-decoration: underline;
     }
 
+    /* Weiter-Button (momentan deaktiviert) unten rechts */
     .cta {
       position: fixed;
       bottom: 20px;
       right: 20px;
     }
 
+    /* Deaktivierter Weiter-Button mit Tooltip beim Hovern */
     .disabled-btn {
       background-color: #ccc;
       color: #666;
@@ -168,6 +182,7 @@
       display: block;
     }
 
+    /* Zurück-Button unten links */
     .back {
       position: fixed;
       bottom: 20px;
@@ -190,8 +205,10 @@
 </head>
 <body>
 
+  <!-- Überschrift zur Registrierung -->
   <h1>Registriere dich für<br>Dein Konto.</h1>
 
+  <!-- Fortschrittsanzeige (3 Schritte) -->
   <div class="steps">
     <div class="step step-1">
       <div class="step-icon-wrapper">
@@ -224,6 +241,7 @@
     </div>
   </div>
 
+  <!-- Rechtlicher Hinweis mit Links zu AGB, Datenschutz, etc. -->
   <a class="disclaimer-link" href="/HedgeFin/HedgeFin/pageAGBs.html">
     Hiermit erstelle ich ein Konto. Ich bestätige, dass ich der 
     <span class="linktext">Kundenvereinbarung</span> und den 
@@ -235,6 +253,7 @@
     Verluste oder sonstige Schäden ausgeschlossen ist.
   </a>
 
+  <!-- Weiter-Button (deaktiviert, zeigt Tooltip beim Hovern) -->
   <div class="cta">
     <button class="disabled-btn">
       Weiter
@@ -245,6 +264,7 @@
     </button>
   </div>
 
+  <!-- Zurück-Button unten links -->
   <div class="back">
     <button onclick="location.href='/HedgeFin/HedgeFin/page2.html'">
       Zurück

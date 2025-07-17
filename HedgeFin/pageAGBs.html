@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Allgemeine Geschäftsbedingungen</title>
   <style>
+    /* Immer eine vertikale Scrollbar anzeigen */
     html {
-      overflow-y: scroll; /* Reserviert Scrollbar-Platz dauerhaft */
+      overflow-y: scroll;
     }
 
+    /* Grund-Layout: weißer Hintergrund, gepolsterter Content */
     body {
       margin: 0;
       padding: 30px 20px 100px;
@@ -17,11 +19,13 @@
       color: #000;
     }
 
+    /* Überschrift der Seite */
     h1 {
       font-size: 24px;
       margin-bottom: 20px;
     }
 
+    /* Haupttext-Bereich der AGB */
     .agb-text {
       font-size: 14px;
       line-height: 1.6;
@@ -41,6 +45,7 @@
       color: #333;
     }
 
+    /* Checkbox zum Akzeptieren der AGB */
     .checkbox-container {
       display: flex;
       align-items: center;
@@ -59,6 +64,7 @@
       cursor: pointer;
     }
 
+    /* Button-Bereich unten */
     .cta {
       display: flex;
       justify-content: flex-end;
@@ -77,7 +83,7 @@
       cursor: pointer;
     }
 
-    /* Scrollbar-Styling + Animation */
+    /* Scrollbar-Styling (hell, abgerundet, animiert) */
     body {
       scrollbar-width: thin;
       scrollbar-color: #aaa #f1f1f1;
@@ -98,6 +104,7 @@
       transition: opacity 0.3s ease;
     }
 
+    /* Scrollbar kann per Klasse ausgeblendet werden (nach Inaktivität) */
     body.hide-scrollbar ::-webkit-scrollbar-thumb {
       opacity: 0;
     }
@@ -105,6 +112,7 @@
 </head>
 <body>
 
+<!-- AGB-Haupttext, inkl. Überschriften, Absätzen und Listen -->
 <div class="agb-text">
 <p>
 <h1>Allgemeine Geschäftsbedingungen (AGB)
@@ -162,17 +170,19 @@
 <p>Weitere Informationen zu Nutzungsbedingungen, Datenschutz, etc.</p>
 </div>
 
-
+  <!-- Checkbox zum Akzeptieren der AGB (Pflicht vor dem Fortsetzen) -->
   <div class="checkbox-container">
     <input type="checkbox" id="agree">
     <label for="agree">Ich habe alles genau gelesen und akzeptiere die AGBs</label>
   </div>
 
+  <!-- Weiter-Button, Weiterleitung je nach Checkbox-Status -->
   <div class="cta">
     <button onclick="weiterleitung()">Registrierung Fortsetzen</button>
   </div>
 
   <script>
+    // Leitet weiter: nur wenn Checkbox aktiviert, zu Schritt 2, sonst zurück
     function weiterleitung() {
       const checkbox = document.getElementById('agree');
       if (checkbox.checked) {
@@ -184,6 +194,7 @@
   </script>
 
   <script>
+    // Scrollbar wird nach 3 Sekunden Inaktivität ausgeblendet (nur für Chrome/Webkit)
     let scrollTimeout;
     const body = document.body;
 
